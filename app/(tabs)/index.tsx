@@ -47,6 +47,7 @@ export default function HomeScreen() {
   const gitProgress = lessonStore.getCourseProgress('git');
   const pythonProgress = lessonStore.getCourseProgress('python');
   const rnProgress = lessonStore.getCourseProgress('reactnative');
+  const tsProgress = lessonStore.getCourseProgress('typescript');
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
@@ -289,6 +290,18 @@ export default function HomeScreen() {
           color="#06B6D4"
           onPress={() => router.push('/(tabs)/learn' as any)}
           index={10}
+        />
+        <CourseCard
+          courseId="typescript"
+          icon="📘"
+          title="TypeScript"
+          description={language === 'id' ? 'JavaScript dengan sintaks penulisan tipe' : 'JavaScript with syntax for types'}
+          modules={3}
+          lessons={9}
+          progress={tsProgress}
+          color="#3178C6"
+          onPress={() => router.push('/(tabs)/learn' as any)}
+          index={11}
         />
 
         {/* Bottom spacer */}

@@ -253,6 +253,22 @@ export const BADGES = {
     descriptionId: 'Selesaikan semua module React Native',
     emoji: '🏆',
   },
+  TS_STARTER: {
+    id: 'ts_starter',
+    name: 'TS Starter',
+    nameId: 'Pemula TS',
+    description: 'Complete TypeScript Module 1',
+    descriptionId: 'Selesaikan Module 1 TypeScript',
+    emoji: '🛡️',
+  },
+  TYPE_DEFENDER: {
+    id: 'type_defender',
+    name: 'Type Defender',
+    nameId: 'Pembela Tipe',
+    description: 'Complete all TypeScript modules',
+    descriptionId: 'Selesaikan semua module TypeScript',
+    emoji: '🗡️',
+  },
   PERFECT_SCORE: {
     id: 'perfect_score',
     name: 'Perfect Score',

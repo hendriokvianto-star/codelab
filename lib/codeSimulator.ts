@@ -135,6 +135,25 @@ export function simulateCode(courseId: string, execCode: string): string {
     } else {
       logs.push('No code provided.');
     }
+  } else if (courseId === 'typescript') {
+    // TypeScript Mock Simulator
+    if (execCode.trim().length > 0) {
+      logs.push(`[TypeScript Compiler] Compiling...`);
+      // Mock some type errors
+      if (execCode.includes('poin = "seratus"') || execCode.includes("score = 'A+'")) {
+        logs.push(`❌ TS2322: Type 'string' is not assignable to type 'number'.`);
+      } else if (execCode.includes('let bahasa = "TypeScript"')) {
+        logs.push(`⚠️ Warning: Type inference used. Consider adding explicit type like 'let bahasa: string'.`);
+        logs.push(`✅ Compiled successfully with warnings.`);
+      } else if (execCode.includes('interface') || execCode.includes('type ') || execCode.includes(': string') || execCode.includes(': number') || execCode.includes(': boolean')) {
+        logs.push(`Type definitions recognized.`);
+        logs.push(`✅ 0 errors found. Compiled successfully.`);
+      } else {
+        logs.push(`✅ Compiled successfully (Treated as plain JavaScript).`);
+      }
+    } else {
+      logs.push('No code provided.');
+    }
   } else if (courseId === 'laravel' || execCode.includes('<?php')) {
     // For PHP, we simulate output
     const echoMatch = execCode.match(/echo\s+["'](.+?)["']/g);

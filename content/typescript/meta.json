@@ -1,0 +1,32 @@
+{
+  "id": "typescript",
+  "title": "TypeScript",
+  "titleId": "TypeScript",
+  "description": "JavaScript with syntax for types",
+  "descriptionId": "JavaScript dengan sintaks penulisan tipe",
+  "icon": "📘",
+  "color": "#3178C6",
+  "modules": [
+    {
+      "id": "ts-m1",
+      "title": "Basic Types",
+      "titleId": "Tipe Dasar",
+      "lessons": ["ts-m1-l1", "ts-m1-l2", "ts-m1-l3"],
+      "quizId": "ts-m1-quiz"
+    },
+    {
+      "id": "ts-m2",
+      "title": "Interfaces",
+      "titleId": "Antarmuka (Interfaces)",
+      "lessons": ["ts-m2-l1", "ts-m2-l2", "ts-m2-l3"],
+      "quizId": "ts-m2-quiz"
+    },
+    {
+      "id": "ts-m3",
+      "title": "Functions & Any",
+      "titleId": "Fungsi & Tipe Any",
+      "lessons": ["ts-m3-l1", "ts-m3-l2", "ts-m3-l3"],
+      "quizId": "ts-m3-quiz"
+    }
+  ]
+}
