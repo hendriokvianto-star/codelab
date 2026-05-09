@@ -117,6 +117,34 @@ export default function LessonScreen() {
         } else {
           logs.push('No code provided.');
         }
+      } else if (lesson.courseId === 'git') {
+        // Git Mock Simulator
+        if (execCode.trim().length > 0) {
+          logs.push(`$ ${execCode.trim()}`);
+          if (execCode.startsWith('git init')) {
+            logs.push(`Initialized empty Git repository in /project/.git/`);
+          } else if (execCode.startsWith('git add')) {
+            logs.push(`Files staged successfully.`);
+          } else if (execCode.startsWith('git commit')) {
+            logs.push(`[main (root-commit)] 1 file changed, 1 insertion(+)`);
+          } else if (execCode.startsWith('git branch')) {
+            logs.push(`Branch created/listed.`);
+          } else if (execCode.startsWith('git checkout') || execCode.startsWith('git switch')) {
+            logs.push(`Switched to branch successfully.`);
+          } else if (execCode.startsWith('git merge')) {
+            logs.push(`Updating... Fast-forward. Merge successful.`);
+          } else if (execCode.startsWith('git clone')) {
+            logs.push(`Cloning into repository... done.`);
+          } else if (execCode.startsWith('git push')) {
+            logs.push(`Enumerating objects: 5, done.\nWriting objects: 100% (3/3), done.\nTo https://github.com/... \n * [new branch] main -> main`);
+          } else if (execCode.startsWith('git pull')) {
+            logs.push(`Updating... \n1 file changed, 3 insertions(+)\nFast-forward`);
+          } else {
+            logs.push(`bash: command not found or not simulated`);
+          }
+        } else {
+          logs.push('No command provided.');
+        }
       } else if (lesson.courseId === 'laravel' || execCode.includes('<?php')) {
         // For PHP, we simulate output
         const echoMatch = execCode.match(/echo\s+["'](.+?)["']/g);

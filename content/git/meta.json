@@ -1,0 +1,32 @@
+{
+  "id": "git",
+  "title": "Git & GitHub",
+  "titleId": "Git & GitHub",
+  "description": "Master version control and collaboration",
+  "descriptionId": "Kuasai sistem versi kontrol dan kolaborasi",
+  "icon": "🐙",
+  "color": "#F05032",
+  "modules": [
+    {
+      "id": "git-m1",
+      "title": "Version Control Basics",
+      "titleId": "Dasar Version Control",
+      "lessons": ["git-m1-l1", "git-m1-l2", "git-m1-l3"],
+      "quizId": "git-m1-quiz"
+    },
+    {
+      "id": "git-m2",
+      "title": "Branches & Merging",
+      "titleId": "Branch & Merge",
+      "lessons": ["git-m2-l1", "git-m2-l2", "git-m2-l3"],
+      "quizId": "git-m2-quiz"
+    },
+    {
+      "id": "git-m3",
+      "title": "GitHub & Remote",
+      "titleId": "GitHub & Remote",
+      "lessons": ["git-m3-l1", "git-m3-l2", "git-m3-l3"],
+      "quizId": "git-m3-quiz"
+    }
+  ]
+}

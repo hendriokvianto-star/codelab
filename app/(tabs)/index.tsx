@@ -44,6 +44,7 @@ export default function HomeScreen() {
   const sqlProgress = lessonStore.getCourseProgress('sql');
   const tailwindProgress = lessonStore.getCourseProgress('tailwind');
   const nodejsProgress = lessonStore.getCourseProgress('nodejs');
+  const gitProgress = lessonStore.getCourseProgress('git');
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
@@ -250,6 +251,18 @@ export default function HomeScreen() {
           color="#68A063"
           onPress={() => router.push('/(tabs)/learn' as any)}
           index={7}
+        />
+        <CourseCard
+          courseId="git"
+          icon="🐙"
+          title="Git & GitHub"
+          description={language === 'id' ? 'Kuasai sistem versi kontrol dan kolaborasi' : 'Master version control and collaboration'}
+          modules={3}
+          lessons={9}
+          progress={gitProgress}
+          color="#F05032"
+          onPress={() => router.push('/(tabs)/learn' as any)}
+          index={8}
         />
 
         {/* Bottom spacer */}

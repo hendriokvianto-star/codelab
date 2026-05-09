@@ -205,6 +205,22 @@ export const BADGES = {
     descriptionId: 'Selesaikan semua module Node.js',
     emoji: '🚀',
   },
+  GIT_STARTER: {
+    id: 'git_starter',
+    name: 'Git Starter',
+    nameId: 'Pemula Git',
+    description: 'Complete Git Module 1',
+    descriptionId: 'Selesaikan Module 1 Git',
+    emoji: '🐙',
+  },
+  VERSION_MASTER: {
+    id: 'version_master',
+    name: 'Version Master',
+    nameId: 'Master Versi',
+    description: 'Complete all Git & GitHub modules',
+    descriptionId: 'Selesaikan semua module Git & GitHub',
+    emoji: '🔀',
+  },
   PERFECT_SCORE: {
     id: 'perfect_score',
     name: 'Perfect Score',
