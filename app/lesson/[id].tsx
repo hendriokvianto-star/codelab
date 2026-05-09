@@ -3,7 +3,7 @@
  * Shows theory, practice code, and completion button
  */
 import React, { useState, useRef } from 'react';
-import { StyleSheet, View, Text, ScrollView, StatusBar, TextInput, Platform, Pressable } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, StatusBar, TextInput, Platform, Pressable, KeyboardAvoidingView } from 'react-native';
 import Animated, { FadeInDown, FadeIn } from 'react-native-reanimated';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useThemeColors, useTranslation } from '@/hooks/useAppTheme';
@@ -114,9 +114,9 @@ export default function LessonScreen() {
   };
 
   return (
-    <View style={[styles.container, { backgroundColor: colors.background }]}>
+    <KeyboardAvoidingView style={[styles.container, { backgroundColor: colors.background }]} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
+      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled">
         {/* Header */}
         <Animated.View entering={FadeInDown.duration(400)} style={styles.header}>
           <Button title="←" onPress={() => router.back()} variant="ghost" size="sm" />
@@ -245,7 +245,7 @@ export default function LessonScreen() {
           onDismiss={() => setBadgeNotif(null)}
         />
       )}
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
