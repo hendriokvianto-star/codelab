@@ -20,6 +20,13 @@
       "titleId": "Membangun Custom Image",
       "lessons": ["docker-m2-l1", "docker-m2-l2", "docker-m2-l3"],
       "quizId": "docker-m2-quiz"
+    },
+    {
+      "id": "docker-m3",
+      "title": "Docker Compose Orchestration",
+      "titleId": "Orkestrasi Docker Compose",
+      "lessons": ["docker-m3-l1", "docker-m3-l2", "docker-m3-l3"],
+      "quizId": "docker-m3-quiz"
     }
   ]
 }

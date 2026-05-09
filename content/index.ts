@@ -177,6 +177,8 @@ import dockerM1Lessons from './docker/module-1/lessons';
 import dockerM1Quiz from './docker/module-1/quiz';
 import dockerM2Lessons from './docker/module-2/lessons';
 import dockerM2Quiz from './docker/module-2/quiz';
+import dockerM3Lessons from './docker/module-3/lessons';
+import dockerM3Quiz from './docker/module-3/quiz';
 
 // Combine all content into a central database
 
@@ -249,7 +251,7 @@ const allQuizzes: Record<string, QuizData> = {};
 });
 
 // Register Docker lessons
-[...dockerM1Lessons, ...dockerM2Lessons].forEach((l) => {
+[...dockerM1Lessons, ...dockerM2Lessons, ...dockerM3Lessons].forEach((l) => {
   allLessons[l.id] = l;
 });
 
@@ -268,7 +270,7 @@ const allQuizzes: Record<string, QuizData> = {};
   reactnativeM1Quiz, reactnativeM2Quiz, reactnativeM3Quiz,
   typescriptM1Quiz, typescriptM2Quiz, typescriptM3Quiz,
   nextjsM1Quiz, nextjsM2Quiz, nextjsM3Quiz,
-  dockerM1Quiz, dockerM2Quiz
+  dockerM1Quiz, dockerM2Quiz, dockerM3Quiz
 ].forEach((q) => {
   allQuizzes[q.id] = q;
 });
