@@ -157,6 +157,22 @@ export const BADGES = {
     descriptionId: 'Selesaikan HTML, CSS, JS, dan React',
     emoji: '💻',
   },
+  SQL_STARTER: {
+    id: 'sql_starter',
+    name: 'SQL Starter',
+    nameId: 'Pemula SQL',
+    description: 'Complete SQL Module 1',
+    descriptionId: 'Selesaikan Module 1 SQL',
+    emoji: '🗄️',
+  },
+  DATA_MASTER: {
+    id: 'data_master',
+    name: 'Data Master',
+    nameId: 'Master Data',
+    description: 'Complete all SQL modules',
+    descriptionId: 'Selesaikan semua module SQL',
+    emoji: '📊',
+  },
   PERFECT_SCORE: {
     id: 'perfect_score',
     name: 'Perfect Score',

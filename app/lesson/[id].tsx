@@ -67,7 +67,22 @@ export default function LessonScreen() {
 
       // Only run JavaScript code (strip PHP tags for display)
       let execCode = codeInput;
-      if (lesson.courseId === 'laravel' || execCode.includes('<?php')) {
+      if (lesson.courseId === 'sql') {
+        // Simple SQL simulation
+        if (execCode.trim().length > 0) {
+          logs.push(`[SQL Executed] \n${execCode}`);
+          if (execCode.toUpperCase().includes('SELECT')) {
+            logs.push('\n| id | name  | age |');
+            logs.push('|----|-------|-----|');
+            logs.push('| 1  | Alice | 25  |');
+            logs.push('| 2  | Budi  | 20  |');
+          } else {
+            logs.push('\nQuery OK, 1 row affected.');
+          }
+        } else {
+          logs.push('No query provided.');
+        }
+      } else if (lesson.courseId === 'laravel' || execCode.includes('<?php')) {
         // For PHP, we simulate output
         const echoMatch = execCode.match(/echo\s+["'](.+?)["']/g);
         if (echoMatch) {

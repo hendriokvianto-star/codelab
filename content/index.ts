@@ -108,6 +108,14 @@ import reactM2Quiz from './react/module-2/quiz';
 import reactM3Lessons from './react/module-3/lessons';
 import reactM3Quiz from './react/module-3/quiz';
 
+import sqlMeta from './sql/meta.json';
+import sqlM1Lessons from './sql/module-1/lessons';
+import sqlM1Quiz from './sql/module-1/quiz';
+import sqlM2Lessons from './sql/module-2/lessons';
+import sqlM2Quiz from './sql/module-2/quiz';
+import sqlM3Lessons from './sql/module-3/lessons';
+import sqlM3Quiz from './sql/module-3/quiz';
+
 const allLessons: Record<string, LessonData> = {};
 const allQuizzes: Record<string, QuizData> = {};
 
@@ -136,13 +144,19 @@ const allQuizzes: Record<string, QuizData> = {};
   allLessons[l.id] = l;
 });
 
+// Register SQL lessons
+[...sqlM1Lessons, ...sqlM2Lessons, ...sqlM3Lessons].forEach((l) => {
+  allLessons[l.id] = l;
+});
+
 // Register quizzes
 [
   jsM1Quiz, jsM2Quiz, jsM3Quiz, 
   lvM1Quiz, lvM2Quiz, lvM3Quiz, 
   htmlM1Quiz, htmlM2Quiz, htmlM3Quiz, 
   cssM1Quiz, cssM2Quiz, cssM3Quiz, 
-  reactM1Quiz, reactM2Quiz, reactM3Quiz
+  reactM1Quiz, reactM2Quiz, reactM3Quiz,
+  sqlM1Quiz, sqlM2Quiz, sqlM3Quiz
 ].forEach((q) => {
   allQuizzes[q.id] = q;
 });
@@ -161,6 +175,7 @@ export function getCourseMeta(courseId: string): CourseMeta {
   if (courseId === 'html') return htmlMeta as unknown as CourseMeta;
   if (courseId === 'css') return cssMeta as unknown as CourseMeta;
   if (courseId === 'react') return reactMeta as unknown as CourseMeta;
+  if (courseId === 'sql') return sqlMeta as unknown as CourseMeta;
   return jsMeta as unknown as CourseMeta;
 }
 

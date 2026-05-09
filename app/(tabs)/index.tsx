@@ -41,6 +41,7 @@ export default function HomeScreen() {
   const htmlProgress = lessonStore.getCourseProgress('html');
   const cssProgress = lessonStore.getCourseProgress('css');
   const reactProgress = lessonStore.getCourseProgress('react');
+  const sqlProgress = lessonStore.getCourseProgress('sql');
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
@@ -211,6 +212,18 @@ export default function HomeScreen() {
           color="#61DAFB"
           onPress={() => router.push('/(tabs)/learn' as any)}
           index={4}
+        />
+        <CourseCard
+          courseId="sql"
+          icon="🗄️"
+          title="SQL & Databases"
+          description={language === 'id' ? 'Kelola data dengan relasional database' : 'Manage data with relational databases'}
+          modules={3}
+          lessons={9}
+          progress={sqlProgress}
+          color="#336791"
+          onPress={() => router.push('/(tabs)/learn' as any)}
+          index={5}
         />
 
         {/* Bottom spacer */}

@@ -1,0 +1,32 @@
+{
+  "id": "sql",
+  "title": "SQL & Databases",
+  "titleId": "Database & SQL",
+  "description": "Learn to manage data and relational databases",
+  "descriptionId": "Belajar mengelola data dan database relasional",
+  "icon": "🗄️",
+  "color": "#336791",
+  "modules": [
+    {
+      "id": "sql-m1",
+      "title": "SQL Queries (SELECT)",
+      "titleId": "Kueri SQL (SELECT)",
+      "lessons": ["sql-m1-l1", "sql-m1-l2", "sql-m1-l3"],
+      "quizId": "sql-m1-quiz"
+    },
+    {
+      "id": "sql-m2",
+      "title": "Data Manipulation",
+      "titleId": "Manipulasi Data",
+      "lessons": ["sql-m2-l1", "sql-m2-l2", "sql-m2-l3"],
+      "quizId": "sql-m2-quiz"
+    },
+    {
+      "id": "sql-m3",
+      "title": "Relationships & Joins",
+      "titleId": "Relasi & Joins",
+      "lessons": ["sql-m3-l1", "sql-m3-l2", "sql-m3-l3"],
+      "quizId": "sql-m3-quiz"
+    }
+  ]
+}
