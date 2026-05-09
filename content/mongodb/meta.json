@@ -13,6 +13,13 @@
       "titleId": "Pengenalan NoSQL & MongoDB",
       "lessons": ["mongodb-m1-l1", "mongodb-m1-l2", "mongodb-m1-l3"],
       "quizId": "mongodb-m1-quiz"
+    },
+    {
+      "id": "mongodb-m2",
+      "title": "Basic CRUD Operations",
+      "titleId": "Operasi CRUD Dasar",
+      "lessons": ["mongodb-m2-l1", "mongodb-m2-l2", "mongodb-m2-l3"],
+      "quizId": "mongodb-m2-quiz"
     }
   ]
 }
