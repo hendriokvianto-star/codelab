@@ -20,6 +20,13 @@
       "titleId": "Operasi CRUD Dasar",
       "lessons": ["mongodb-m2-l1", "mongodb-m2-l2", "mongodb-m2-l3"],
       "quizId": "mongodb-m2-quiz"
+    },
+    {
+      "id": "mongodb-m3",
+      "title": "Advanced Query & Aggregation",
+      "titleId": "Query Lanjutan & Aggregation",
+      "lessons": ["mongodb-m3-l1", "mongodb-m3-l2", "mongodb-m3-l3"],
+      "quizId": "mongodb-m3-quiz"
     }
   ]
 }

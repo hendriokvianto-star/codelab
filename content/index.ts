@@ -185,6 +185,8 @@ import mongodbM1Lessons from './mongodb/module-1/lessons';
 import mongodbM1Quiz from './mongodb/module-1/quiz';
 import mongodbM2Lessons from './mongodb/module-2/lessons';
 import mongodbM2Quiz from './mongodb/module-2/quiz';
+import mongodbM3Lessons from './mongodb/module-3/lessons';
+import mongodbM3Quiz from './mongodb/module-3/quiz';
 
 // Combine all content into a central database
 
@@ -262,7 +264,7 @@ const allQuizzes: Record<string, QuizData> = {};
 });
 
 // Register MongoDB lessons
-[...mongodbM1Lessons, ...mongodbM2Lessons].forEach((l) => {
+[...mongodbM1Lessons, ...mongodbM2Lessons, ...mongodbM3Lessons].forEach((l) => {
   allLessons[l.id] = l;
 });
 
@@ -282,7 +284,7 @@ const allQuizzes: Record<string, QuizData> = {};
   typescriptM1Quiz, typescriptM2Quiz, typescriptM3Quiz,
   nextjsM1Quiz, nextjsM2Quiz, nextjsM3Quiz,
   dockerM1Quiz, dockerM2Quiz, dockerM3Quiz,
-  mongodbM1Quiz, mongodbM2Quiz
+  mongodbM1Quiz, mongodbM2Quiz, mongodbM3Quiz
 ].forEach((q) => {
   allQuizzes[q.id] = q;
 });
