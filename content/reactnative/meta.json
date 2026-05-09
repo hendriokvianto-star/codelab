@@ -1,0 +1,32 @@
+{
+  "id": "reactnative",
+  "title": "React Native",
+  "titleId": "React Native",
+  "description": "Build mobile apps with React",
+  "descriptionId": "Bangun aplikasi mobile dengan React",
+  "icon": "📱",
+  "color": "#06B6D4",
+  "modules": [
+    {
+      "id": "rn-m1",
+      "title": "Mobile Components",
+      "titleId": "Komponen Mobile",
+      "lessons": ["rn-m1-l1", "rn-m1-l2", "rn-m1-l3"],
+      "quizId": "rn-m1-quiz"
+    },
+    {
+      "id": "rn-m2",
+      "title": "Flexbox Layout",
+      "titleId": "Layout Flexbox",
+      "lessons": ["rn-m2-l1", "rn-m2-l2", "rn-m2-l3"],
+      "quizId": "rn-m2-quiz"
+    },
+    {
+      "id": "rn-m3",
+      "title": "Interactions",
+      "titleId": "Interaksi",
+      "lessons": ["rn-m3-l1", "rn-m3-l2", "rn-m3-l3"],
+      "quizId": "rn-m3-quiz"
+    }
+  ]
+}

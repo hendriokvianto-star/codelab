@@ -237,6 +237,22 @@ export const BADGES = {
     descriptionId: 'Selesaikan semua module Python',
     emoji: '🧙‍♂️',
   },
+  RN_STARTER: {
+    id: 'rn_starter',
+    name: 'RN Starter',
+    nameId: 'Pemula RN',
+    description: 'Complete React Native Module 1',
+    descriptionId: 'Selesaikan Module 1 React Native',
+    emoji: '📱',
+  },
+  MOBILE_EXPERT: {
+    id: 'mobile_expert',
+    name: 'Mobile Expert',
+    nameId: 'Pakar Mobile',
+    description: 'Complete all React Native modules',
+    descriptionId: 'Selesaikan semua module React Native',
+    emoji: '🏆',
+  },
   PERFECT_SCORE: {
     id: 'perfect_score',
     name: 'Perfect Score',

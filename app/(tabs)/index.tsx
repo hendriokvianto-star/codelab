@@ -46,6 +46,7 @@ export default function HomeScreen() {
   const nodejsProgress = lessonStore.getCourseProgress('nodejs');
   const gitProgress = lessonStore.getCourseProgress('git');
   const pythonProgress = lessonStore.getCourseProgress('python');
+  const rnProgress = lessonStore.getCourseProgress('reactnative');
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
@@ -276,6 +277,18 @@ export default function HomeScreen() {
           color="#3776AB"
           onPress={() => router.push('/(tabs)/learn' as any)}
           index={9}
+        />
+        <CourseCard
+          courseId="reactnative"
+          icon="📱"
+          title="React Native"
+          description={language === 'id' ? 'Bangun aplikasi mobile dengan React' : 'Build mobile apps with React'}
+          modules={3}
+          lessons={9}
+          progress={rnProgress}
+          color="#06B6D4"
+          onPress={() => router.push('/(tabs)/learn' as any)}
+          index={10}
         />
 
         {/* Bottom spacer */}

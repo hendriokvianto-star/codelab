@@ -174,6 +174,35 @@ export default function LessonScreen() {
         } else {
           logs.push('No code provided.');
         }
+      } else if (lesson.courseId === 'reactnative') {
+        // React Native Mock Simulator
+        if (execCode.trim().length > 0) {
+          logs.push(`[React Native Simulator] Compiling...`);
+          
+          if (execCode.includes('<View') || execCode.includes('<Text') || execCode.includes('<Button') || execCode.includes('<TextInput')) {
+             logs.push(`UI Components detected.`);
+             
+             if (execCode.includes('flex: 1')) logs.push(`> Applied layout: flex-1 (fills screen)`);
+             if (execCode.includes('flexDirection')) logs.push(`> Applied flex direction`);
+             
+             const textMatches = execCode.match(/<Text.*?>(.*?)<\/Text>/);
+             if (textMatches && textMatches[1]) {
+                logs.push(`> Rendered Text: "${textMatches[1]}"`);
+             }
+             
+             if (execCode.includes('<Button')) {
+                logs.push(`> Rendered Button component`);
+             }
+             
+             logs.push(`\n✅ Render Simulated Successfully`);
+          } else if (execCode.includes('StyleSheet.create')) {
+             logs.push(`Styles compiled successfully.`);
+          } else {
+             logs.push(`No recognized React Native components rendered.`);
+          }
+        } else {
+          logs.push('No code provided.');
+        }
       } else if (lesson.courseId === 'laravel' || execCode.includes('<?php')) {
         // For PHP, we simulate output
         const echoMatch = execCode.match(/echo\s+["'](.+?)["']/g);
