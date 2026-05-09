@@ -42,6 +42,7 @@ export default function HomeScreen() {
   const cssProgress = lessonStore.getCourseProgress('css');
   const reactProgress = lessonStore.getCourseProgress('react');
   const sqlProgress = lessonStore.getCourseProgress('sql');
+  const tailwindProgress = lessonStore.getCourseProgress('tailwind');
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
@@ -224,6 +225,18 @@ export default function HomeScreen() {
           color="#336791"
           onPress={() => router.push('/(tabs)/learn' as any)}
           index={5}
+        />
+        <CourseCard
+          courseId="tailwind"
+          icon="🪶"
+          title="Tailwind CSS"
+          description={language === 'id' ? 'Bangun UI dengan cepat menggunakan utility classes' : 'Build UIs rapidly with utility classes'}
+          modules={3}
+          lessons={9}
+          progress={tailwindProgress}
+          color="#0ED3CF"
+          onPress={() => router.push('/(tabs)/learn' as any)}
+          index={6}
         />
 
         {/* Bottom spacer */}

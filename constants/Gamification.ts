@@ -173,6 +173,22 @@ export const BADGES = {
     descriptionId: 'Selesaikan semua module SQL',
     emoji: '📊',
   },
+  TAILWIND_STARTER: {
+    id: 'tailwind_starter',
+    name: 'Tailwind Starter',
+    nameId: 'Pemula Tailwind',
+    description: 'Complete Tailwind Module 1',
+    descriptionId: 'Selesaikan Module 1 Tailwind',
+    emoji: '🪶',
+  },
+  TAILWIND_MASTER: {
+    id: 'tailwind_master',
+    name: 'Tailwind Master',
+    nameId: 'Master Tailwind',
+    description: 'Complete all Tailwind modules',
+    descriptionId: 'Selesaikan semua module Tailwind',
+    emoji: '💨',
+  },
   PERFECT_SCORE: {
     id: 'perfect_score',
     name: 'Perfect Score',

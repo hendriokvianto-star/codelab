@@ -82,6 +82,22 @@ export default function LessonScreen() {
         } else {
           logs.push('No query provided.');
         }
+      } else if (lesson.courseId === 'tailwind') {
+        // Tailwind string matching simulator
+        if (execCode.trim().length > 0) {
+          logs.push(`[Tailwind Validation]`);
+          // Extract class="something" from the code using regex
+          const classMatch = execCode.match(/class=["'](.*?)["']/);
+          if (classMatch && classMatch[1]) {
+            const classes = classMatch[1];
+            logs.push(`Detected classes: "${classes}"`);
+            logs.push(`\nRender Simulated OK!`);
+          } else {
+            logs.push(`No class attribute found or it is empty.`);
+          }
+        } else {
+          logs.push('No code provided.');
+        }
       } else if (lesson.courseId === 'laravel' || execCode.includes('<?php')) {
         // For PHP, we simulate output
         const echoMatch = execCode.match(/echo\s+["'](.+?)["']/g);

@@ -1,0 +1,32 @@
+{
+  "id": "tailwind",
+  "title": "Tailwind CSS",
+  "titleId": "Tailwind CSS",
+  "description": "Rapidly build modern UIs with utility classes",
+  "descriptionId": "Bangun UI modern dengan cepat dengan kelas utilitas",
+  "icon": "🪶",
+  "color": "#0ED3CF",
+  "modules": [
+    {
+      "id": "tailwind-m1",
+      "title": "Utility-First Fundamentals",
+      "titleId": "Dasar Utility-First",
+      "lessons": ["tailwind-m1-l1", "tailwind-m1-l2", "tailwind-m1-l3"],
+      "quizId": "tailwind-m1-quiz"
+    },
+    {
+      "id": "tailwind-m2",
+      "title": "Layouts & Grid",
+      "titleId": "Tata Letak & Grid",
+      "lessons": ["tailwind-m2-l1", "tailwind-m2-l2", "tailwind-m2-l3"],
+      "quizId": "tailwind-m2-quiz"
+    },
+    {
+      "id": "tailwind-m3",
+      "title": "Responsive & States",
+      "titleId": "Responsif & State",
+      "lessons": ["tailwind-m3-l1", "tailwind-m3-l2", "tailwind-m3-l3"],
+      "quizId": "tailwind-m3-quiz"
+    }
+  ]
+}
