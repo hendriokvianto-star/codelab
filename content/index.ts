@@ -140,6 +140,14 @@ import gitM2Quiz from './git/module-2/quiz';
 import gitM3Lessons from './git/module-3/lessons';
 import gitM3Quiz from './git/module-3/quiz';
 
+import pythonMeta from './python/meta.json';
+import pythonM1Lessons from './python/module-1/lessons';
+import pythonM1Quiz from './python/module-1/quiz';
+import pythonM2Lessons from './python/module-2/lessons';
+import pythonM2Quiz from './python/module-2/quiz';
+import pythonM3Lessons from './python/module-3/lessons';
+import pythonM3Quiz from './python/module-3/quiz';
+
 const allLessons: Record<string, LessonData> = {};
 const allQuizzes: Record<string, QuizData> = {};
 
@@ -188,6 +196,11 @@ const allQuizzes: Record<string, QuizData> = {};
   allLessons[l.id] = l;
 });
 
+// Register Python lessons
+[...pythonM1Lessons, ...pythonM2Lessons, ...pythonM3Lessons].forEach((l) => {
+  allLessons[l.id] = l;
+});
+
 // Register quizzes
 [
   jsM1Quiz, jsM2Quiz, jsM3Quiz, 
@@ -198,7 +211,8 @@ const allQuizzes: Record<string, QuizData> = {};
   sqlM1Quiz, sqlM2Quiz, sqlM3Quiz,
   tailwindM1Quiz, tailwindM2Quiz, tailwindM3Quiz,
   nodejsM1Quiz, nodejsM2Quiz, nodejsM3Quiz,
-  gitM1Quiz, gitM2Quiz, gitM3Quiz
+  gitM1Quiz, gitM2Quiz, gitM3Quiz,
+  pythonM1Quiz, pythonM2Quiz, pythonM3Quiz
 ].forEach((q) => {
   allQuizzes[q.id] = q;
 });
@@ -221,6 +235,7 @@ export function getCourseMeta(courseId: string): CourseMeta {
   if (courseId === 'tailwind') return tailwindMeta as unknown as CourseMeta;
   if (courseId === 'nodejs') return nodejsMeta as unknown as CourseMeta;
   if (courseId === 'git') return gitMeta as unknown as CourseMeta;
+  if (courseId === 'python') return pythonMeta as unknown as CourseMeta;
   return jsMeta as unknown as CourseMeta;
 }
 

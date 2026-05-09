@@ -221,6 +221,22 @@ export const BADGES = {
     descriptionId: 'Selesaikan semua module Git & GitHub',
     emoji: '🔀',
   },
+  PYTHON_STARTER: {
+    id: 'python_starter',
+    name: 'Python Starter',
+    nameId: 'Pemula Python',
+    description: 'Complete Python Module 1',
+    descriptionId: 'Selesaikan Module 1 Python',
+    emoji: '🐍',
+  },
+  SNAKE_CHARMER: {
+    id: 'snake_charmer',
+    name: 'Snake Charmer',
+    nameId: 'Pawang Ular',
+    description: 'Complete all Python modules',
+    descriptionId: 'Selesaikan semua module Python',
+    emoji: '🧙‍♂️',
+  },
   PERFECT_SCORE: {
     id: 'perfect_score',
     name: 'Perfect Score',

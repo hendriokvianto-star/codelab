@@ -145,6 +145,35 @@ export default function LessonScreen() {
         } else {
           logs.push('No command provided.');
         }
+      } else if (lesson.courseId === 'python') {
+        // Python Mock Simulator
+        if (execCode.trim().length > 0) {
+          // Check for syntax errors first (rudimentary)
+          if (execCode.includes('if ') && !execCode.includes(':')) {
+             logs.push(`SyntaxError: expected ':'`);
+          } else if (execCode.includes('for ') && !execCode.includes(':')) {
+             logs.push(`SyntaxError: expected ':'`);
+          } else if (execCode.includes('while ') && !execCode.includes(':')) {
+             logs.push(`SyntaxError: expected ':'`);
+          } else if (execCode.includes('def ') && !execCode.includes(':')) {
+             logs.push(`SyntaxError: expected ':'`);
+          } else {
+             logs.push(`[Python Simulator Executed]`);
+             // Extract anything inside print("...") or print('...') or print(...)
+             const printMatches = execCode.match(/print\((["']?)(.*?)\1\)/g);
+             if (printMatches) {
+               printMatches.forEach(match => {
+                 const innerContent = match.replace(/print\((["']?)(.*?)\1\)/, '$2');
+                 logs.push(`> ${innerContent}`);
+               });
+             } else {
+                 logs.push(`(No output)`);
+             }
+             logs.push(`\nProcess finished with exit code 0`);
+          }
+        } else {
+          logs.push('No code provided.');
+        }
       } else if (lesson.courseId === 'laravel' || execCode.includes('<?php')) {
         // For PHP, we simulate output
         const echoMatch = execCode.match(/echo\s+["'](.+?)["']/g);

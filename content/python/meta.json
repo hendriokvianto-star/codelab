@@ -1,0 +1,32 @@
+{
+  "id": "python",
+  "title": "Dasar Python",
+  "titleId": "Dasar Python",
+  "description": "Learn the world's most popular language",
+  "descriptionId": "Pelajari bahasa pemrograman terpopuler",
+  "icon": "🐍",
+  "color": "#3776AB",
+  "modules": [
+    {
+      "id": "python-m1",
+      "title": "Python Basics",
+      "titleId": "Dasar Python",
+      "lessons": ["python-m1-l1", "python-m1-l2", "python-m1-l3"],
+      "quizId": "python-m1-quiz"
+    },
+    {
+      "id": "python-m2",
+      "title": "Control Flow",
+      "titleId": "Alur Kontrol",
+      "lessons": ["python-m2-l1", "python-m2-l2", "python-m2-l3"],
+      "quizId": "python-m2-quiz"
+    },
+    {
+      "id": "python-m3",
+      "title": "Functions & Lists",
+      "titleId": "Fungsi & List",
+      "lessons": ["python-m3-l1", "python-m3-l2", "python-m3-l3"],
+      "quizId": "python-m3-quiz"
+    }
+  ]
+}

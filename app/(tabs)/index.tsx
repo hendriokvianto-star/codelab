@@ -45,6 +45,7 @@ export default function HomeScreen() {
   const tailwindProgress = lessonStore.getCourseProgress('tailwind');
   const nodejsProgress = lessonStore.getCourseProgress('nodejs');
   const gitProgress = lessonStore.getCourseProgress('git');
+  const pythonProgress = lessonStore.getCourseProgress('python');
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
@@ -263,6 +264,18 @@ export default function HomeScreen() {
           color="#F05032"
           onPress={() => router.push('/(tabs)/learn' as any)}
           index={8}
+        />
+        <CourseCard
+          courseId="python"
+          icon="🐍"
+          title="Dasar Python"
+          description={language === 'id' ? 'Pelajari bahasa pemrograman terpopuler' : 'Learn the world\'s most popular language'}
+          modules={3}
+          lessons={9}
+          progress={pythonProgress}
+          color="#3776AB"
+          onPress={() => router.push('/(tabs)/learn' as any)}
+          index={9}
         />
 
         {/* Bottom spacer */}
