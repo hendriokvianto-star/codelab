@@ -27,6 +27,13 @@
       "edgeToEdgeEnabled": true,
       "permissions": []
     },
+    "androidStatusBar": {
+      "translucent": true,
+      "hidden": true
+    },
+    "androidNavigationBar": {
+      "visible": "sticky-immersive"
+    },
     "web": {
       "bundler": "metro",
       "output": "static",
@@ -41,8 +48,10 @@
     },
     "extra": {
       "eas": {
-        "projectId": "codelab-learn"
-      }
-    }
+        "projectId": "2a50f902-20c2-4622-9805-5bea82dd542b"
+      },
+      "router": {}
+    },
+    "owner": "hendriokvs-organization"
   }
 }

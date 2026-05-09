@@ -24,9 +24,9 @@ export function useThemeColor(
   const colorFromProps = props[theme];
 
   if (colorFromProps) {
-    return colorFromProps;
+    return colorFromProps as string;
   } else {
-    return Colors[theme][colorName];
+    return Colors[theme][colorName] as string;
   }
 }
 

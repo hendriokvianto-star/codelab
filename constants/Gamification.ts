@@ -115,7 +115,7 @@ export const BADGES = {
  * Get level info from XP amount
  */
 export function getLevelFromXP(xp: number) {
-  let currentLevel = LEVELS[0];
+  let currentLevel: typeof LEVELS[number] = LEVELS[0];
   for (const level of LEVELS) {
     if (xp >= level.xpRequired) {
       currentLevel = level;

@@ -9,6 +9,9 @@ import { useFonts } from 'expo-font';
 import { Stack, useRouter, useSegments, Redirect } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect, useState } from 'react';
+import { Platform } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import * as NavigationBar from 'expo-navigation-bar';
 import 'react-native-reanimated';
 
 import { useSettingsStore } from '@/stores/useSettingsStore';
@@ -90,6 +93,14 @@ function RootLayoutNav() {
     return checkHydration();
   }, []);
 
+  // Hide system navigation bar on Android (immersive fullscreen)
+  useEffect(() => {
+    if (Platform.OS === 'android') {
+      NavigationBar.setVisibilityAsync('hidden').catch(() => {});
+      NavigationBar.setBehaviorAsync('overlay-swipe').catch(() => {});
+    }
+  }, []);
+
   return (
     <ThemeProvider value={isDarkMode ? CodeLabDarkTheme : CodeLabLightTheme}>
       <Stack screenOptions={{ headerShown: false }}>
@@ -101,6 +112,7 @@ function RootLayoutNav() {
         <Stack.Screen name="search" options={{ animation: 'slide_from_bottom' }} />
         <Stack.Screen name="modal" options={{ presentation: 'modal', headerShown: true }} />
       </Stack>
+      <StatusBar hidden={true} />
     </ThemeProvider>
   );
 }
