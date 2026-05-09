@@ -2,8 +2,8 @@
  * CodeLab — Home Screen (Fase 4)
  * Dashboard with search, streak, XP, daily challenge, and course cards
  */
-import React from 'react';
-import { StyleSheet, View, Text, ScrollView, StatusBar, Pressable, Platform } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View, Text, ScrollView, StatusBar, Pressable, Platform, TextInput } from 'react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import { useRouter, Redirect } from 'expo-router';
 import { useThemeColors, useTranslation } from '@/hooks/useAppTheme';
@@ -35,20 +35,33 @@ export default function HomeScreen() {
   const dailyChallenge = getDailyChallenges()[0];
   const levelInfo = getLevelFromXP(totalXP);
 
-  // Calculate real progress from lesson store
-  const jsProgress = lessonStore.getCourseProgress('javascript');
-  const lvProgress = lessonStore.getCourseProgress('laravel');
-  const htmlProgress = lessonStore.getCourseProgress('html');
-  const cssProgress = lessonStore.getCourseProgress('css');
-  const reactProgress = lessonStore.getCourseProgress('react');
-  const sqlProgress = lessonStore.getCourseProgress('sql');
-  const tailwindProgress = lessonStore.getCourseProgress('tailwind');
-  const nodejsProgress = lessonStore.getCourseProgress('nodejs');
-  const gitProgress = lessonStore.getCourseProgress('git');
-  const pythonProgress = lessonStore.getCourseProgress('python');
-  const rnProgress = lessonStore.getCourseProgress('reactnative');
-  const tsProgress = lessonStore.getCourseProgress('typescript');
-  const nextProgress = lessonStore.getCourseProgress('nextjs');
+  // Course categorization & filtering
+  const [searchQuery, setSearchQuery] = useState('');
+  const [activeCategory, setActiveCategory] = useState('Semua');
+
+  const CATEGORIES = ['Semua', 'Frontend', 'Backend', 'Database', 'Mobile', 'DevOps', 'Fundamental'];
+
+  const COURSES = [
+    { id: 'javascript', icon: '⚡', title: 'JavaScript', desc: t('course.javascript_desc'), category: 'Frontend', color: '#F7DF1E', modules: 3, lessons: 12 },
+    { id: 'laravel', icon: '🔺', title: 'Laravel', desc: t('course.laravel_desc'), category: 'Backend', color: '#FF2D20', modules: 3, lessons: 12 },
+    { id: 'html', icon: '📄', title: 'HTML', desc: language === 'id' ? 'Pelajari struktur dasar web' : 'Learn basic web structure', category: 'Frontend', color: '#E34F26', modules: 3, lessons: 9 },
+    { id: 'css', icon: '🎨', title: 'CSS', desc: language === 'id' ? 'Desain halaman web yang interaktif' : 'Style beautiful web pages', category: 'Frontend', color: '#1572B6', modules: 3, lessons: 9 },
+    { id: 'react', icon: '⚛️', title: 'React.js', desc: language === 'id' ? 'Bangun UI modern dengan React' : 'Build modern UIs with React', category: 'Frontend', color: '#61DAFB', modules: 3, lessons: 9 },
+    { id: 'sql', icon: '🗄️', title: 'SQL & Databases', desc: language === 'id' ? 'Kelola data dengan relasional database' : 'Manage data with relational databases', category: 'Database', color: '#336791', modules: 3, lessons: 9 },
+    { id: 'tailwind', icon: '🪶', title: 'Tailwind CSS', desc: language === 'id' ? 'Bangun UI dengan cepat menggunakan utility classes' : 'Build UIs rapidly with utility classes', category: 'Frontend', color: '#0ED3CF', modules: 3, lessons: 9 },
+    { id: 'nodejs', icon: '🟢', title: 'Node.js & Express', desc: language === 'id' ? 'Bangun backend API yang cepat dan skalabel' : 'Build fast and scalable backend APIs', category: 'Backend', color: '#68A063', modules: 3, lessons: 9 },
+    { id: 'git', icon: '🐙', title: 'Git & GitHub', desc: language === 'id' ? 'Kuasai sistem versi kontrol dan kolaborasi' : 'Master version control and collaboration', category: 'DevOps', color: '#F05032', modules: 3, lessons: 9 },
+    { id: 'python', icon: '🐍', title: 'Dasar Python', desc: language === 'id' ? 'Pelajari bahasa pemrograman terpopuler' : 'Learn the world\'s most popular language', category: 'Fundamental', color: '#3776AB', modules: 3, lessons: 9 },
+    { id: 'reactnative', icon: '📱', title: 'React Native', desc: language === 'id' ? 'Bangun aplikasi mobile dengan React' : 'Build mobile apps with React', category: 'Mobile', color: '#06B6D4', modules: 3, lessons: 9 },
+    { id: 'typescript', icon: '📘', title: 'TypeScript', desc: language === 'id' ? 'JavaScript dengan sintaks penulisan tipe' : 'JavaScript with syntax for types', category: 'Frontend', color: '#3178C6', modules: 3, lessons: 9 },
+    { id: 'nextjs', icon: '⬛', title: 'Next.js', desc: language === 'id' ? 'Framework React untuk Web' : 'The React Framework for the Web', category: 'Frontend', color: '#111111', modules: 3, lessons: 9 }
+  ];
+
+  const filteredCourses = COURSES.filter(c => {
+    const matchCategory = activeCategory === 'Semua' || c.category === activeCategory;
+    const matchSearch = c.title.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchCategory && matchSearch;
+  });
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
@@ -159,163 +172,75 @@ export default function HomeScreen() {
           </Text>
         </Animated.View>
 
+        {/* Search & Filter */}
+        <Animated.View entering={FadeInDown.delay(450).duration(500)} style={{ marginBottom: 16 }}>
+          <View style={[styles.inlineSearchBox, { backgroundColor: colors.surface, borderColor: colors.border }]}>
+            <Text style={{ fontSize: 16 }}>🔍</Text>
+            <TextInput
+              style={[styles.inlineSearchInput, { color: colors.text }]}
+              value={searchQuery}
+              onChangeText={setSearchQuery}
+              placeholder={language === 'id' ? 'Cari React, SQL...' : 'Search React, SQL...'}
+              placeholderTextColor={colors.textMuted}
+            />
+            {searchQuery.length > 0 && (
+              <Pressable onPress={() => setSearchQuery('')}>
+                <Text style={{ fontSize: 16, color: colors.textMuted }}>✕</Text>
+              </Pressable>
+            )}
+          </View>
+          
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginTop: 12 }}>
+            <View style={{ flexDirection: 'row', gap: 8, paddingRight: 20 }}>
+              {CATEGORIES.map(cat => (
+                <Pressable
+                  key={cat}
+                  onPress={() => setActiveCategory(cat)}
+                  style={[
+                    styles.filterChip,
+                    { 
+                      backgroundColor: activeCategory === cat ? colors.primary : colors.surface,
+                      borderColor: activeCategory === cat ? colors.primary : colors.border
+                    }
+                  ]}
+                >
+                  <Text style={{ 
+                    color: activeCategory === cat ? '#FFF' : colors.text,
+                    fontWeight: activeCategory === cat ? '700' : '500',
+                    fontSize: 13
+                  }}>
+                    {cat}
+                  </Text>
+                </Pressable>
+              ))}
+            </View>
+          </ScrollView>
+        </Animated.View>
+
         {/* Course Cards */}
-        <CourseCard
-          courseId="javascript"
-          icon="⚡"
-          title="JavaScript"
-          description={t('course.javascript_desc')}
-          modules={3}
-          lessons={12}
-          progress={jsProgress}
-          color="#F7DF1E"
-          onPress={() => router.push('/(tabs)/learn' as any)}
-          index={0}
-        />
-        <CourseCard
-          courseId="laravel"
-          icon="🔺"
-          title="Laravel"
-          description={t('course.laravel_desc')}
-          modules={3}
-          lessons={12}
-          progress={lvProgress}
-          color="#FF2D20"
-          onPress={() => router.push('/(tabs)/learn' as any)}
-          index={1}
-        />
-        <CourseCard
-          courseId="html"
-          icon="📄"
-          title="HTML"
-          description={language === 'id' ? 'Pelajari struktur dasar web' : 'Learn basic web structure'}
-          modules={3}
-          lessons={9}
-          progress={htmlProgress}
-          color="#E34F26"
-          onPress={() => router.push('/(tabs)/learn' as any)}
-          index={2}
-        />
-        <CourseCard
-          courseId="css"
-          icon="🎨"
-          title="CSS"
-          description={language === 'id' ? 'Desain halaman web yang interaktif' : 'Style beautiful web pages'}
-          modules={3}
-          lessons={9}
-          progress={cssProgress}
-          color="#1572B6"
-          onPress={() => router.push('/(tabs)/learn' as any)}
-          index={3}
-        />
-        <CourseCard
-          courseId="react"
-          icon="⚛️"
-          title="React.js"
-          description={language === 'id' ? 'Bangun UI modern dengan React' : 'Build modern UIs with React'}
-          modules={3}
-          lessons={9}
-          progress={reactProgress}
-          color="#61DAFB"
-          onPress={() => router.push('/(tabs)/learn' as any)}
-          index={4}
-        />
-        <CourseCard
-          courseId="sql"
-          icon="🗄️"
-          title="SQL & Databases"
-          description={language === 'id' ? 'Kelola data dengan relasional database' : 'Manage data with relational databases'}
-          modules={3}
-          lessons={9}
-          progress={sqlProgress}
-          color="#336791"
-          onPress={() => router.push('/(tabs)/learn' as any)}
-          index={5}
-        />
-        <CourseCard
-          courseId="tailwind"
-          icon="🪶"
-          title="Tailwind CSS"
-          description={language === 'id' ? 'Bangun UI dengan cepat menggunakan utility classes' : 'Build UIs rapidly with utility classes'}
-          modules={3}
-          lessons={9}
-          progress={tailwindProgress}
-          color="#0ED3CF"
-          onPress={() => router.push('/(tabs)/learn' as any)}
-          index={6}
-        />
-        <CourseCard
-          courseId="nodejs"
-          icon="🟢"
-          title="Node.js & Express"
-          description={language === 'id' ? 'Bangun backend API yang cepat dan skalabel' : 'Build fast and scalable backend APIs'}
-          modules={3}
-          lessons={9}
-          progress={nodejsProgress}
-          color="#68A063"
-          onPress={() => router.push('/(tabs)/learn' as any)}
-          index={7}
-        />
-        <CourseCard
-          courseId="git"
-          icon="🐙"
-          title="Git & GitHub"
-          description={language === 'id' ? 'Kuasai sistem versi kontrol dan kolaborasi' : 'Master version control and collaboration'}
-          modules={3}
-          lessons={9}
-          progress={gitProgress}
-          color="#F05032"
-          onPress={() => router.push('/(tabs)/learn' as any)}
-          index={8}
-        />
-        <CourseCard
-          courseId="python"
-          icon="🐍"
-          title="Dasar Python"
-          description={language === 'id' ? 'Pelajari bahasa pemrograman terpopuler' : 'Learn the world\'s most popular language'}
-          modules={3}
-          lessons={9}
-          progress={pythonProgress}
-          color="#3776AB"
-          onPress={() => router.push('/(tabs)/learn' as any)}
-          index={9}
-        />
-        <CourseCard
-          courseId="reactnative"
-          icon="📱"
-          title="React Native"
-          description={language === 'id' ? 'Bangun aplikasi mobile dengan React' : 'Build mobile apps with React'}
-          modules={3}
-          lessons={9}
-          progress={rnProgress}
-          color="#06B6D4"
-          onPress={() => router.push('/(tabs)/learn' as any)}
-          index={10}
-        />
-        <CourseCard
-          courseId="typescript"
-          icon="📘"
-          title="TypeScript"
-          description={language === 'id' ? 'JavaScript dengan sintaks penulisan tipe' : 'JavaScript with syntax for types'}
-          modules={3}
-          lessons={9}
-          progress={tsProgress}
-          color="#3178C6"
-          onPress={() => router.push('/(tabs)/learn' as any)}
-          index={11}
-        />
-        <CourseCard
-          courseId="nextjs"
-          icon="⬛"
-          title="Next.js"
-          description={language === 'id' ? 'Framework React untuk Web' : 'The React Framework for the Web'}
-          modules={3}
-          lessons={9}
-          progress={nextProgress}
-          color="#111111"
-          onPress={() => router.push('/(tabs)/learn' as any)}
-          index={12}
-        />
+        {filteredCourses.length > 0 ? (
+          filteredCourses.map((c, idx) => (
+            <CourseCard
+              key={c.id}
+              courseId={c.id}
+              icon={c.icon}
+              title={c.title}
+              description={c.desc}
+              modules={c.modules}
+              lessons={c.lessons}
+              progress={lessonStore.getCourseProgress(c.id)}
+              color={c.color}
+              onPress={() => router.push('/(tabs)/learn' as any)}
+              index={idx}
+            />
+          ))
+        ) : (
+          <View style={{ paddingVertical: 32, alignItems: 'center' }}>
+            <Text style={{ fontSize: 15, color: colors.textMuted }}>
+              {language === 'id' ? 'Kursus tidak ditemukan' : 'Course not found'}
+            </Text>
+          </View>
+        )}
 
         {/* Bottom spacer */}
         <View style={{ height: 32 }} />
@@ -398,5 +323,24 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '700',
     marginTop: 4,
+  },
+  inlineSearchBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderRadius: 12,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    gap: 8,
+  },
+  inlineSearchInput: {
+    flex: 1,
+    fontSize: 15,
+  },
+  filterChip: {
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 20,
+    borderWidth: 1,
   },
 });
