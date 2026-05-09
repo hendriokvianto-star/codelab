@@ -40,6 +40,7 @@ export default function HomeScreen() {
   const lvProgress = lessonStore.getCourseProgress('laravel');
   const htmlProgress = lessonStore.getCourseProgress('html');
   const cssProgress = lessonStore.getCourseProgress('css');
+  const reactProgress = lessonStore.getCourseProgress('react');
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
@@ -198,6 +199,18 @@ export default function HomeScreen() {
           color="#1572B6"
           onPress={() => router.push('/(tabs)/learn' as any)}
           index={3}
+        />
+        <CourseCard
+          courseId="react"
+          icon="⚛️"
+          title="React.js"
+          description={language === 'id' ? 'Bangun UI modern dengan React' : 'Build modern UIs with React'}
+          modules={3}
+          lessons={9}
+          progress={reactProgress}
+          color="#61DAFB"
+          onPress={() => router.push('/(tabs)/learn' as any)}
+          index={4}
         />
 
         {/* Bottom spacer */}

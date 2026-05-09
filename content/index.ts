@@ -85,11 +85,14 @@ import jsMeta from './javascript/meta.json';
 import lvMeta from './laravel/meta.json';
 import htmlMeta from './html/meta.json';
 import cssMeta from './css/meta.json';
+import reactMeta from './react/meta.json';
 
 import htmlM1Lessons from './html/module-1/lessons';
 import htmlM1Quiz from './html/module-1/quiz';
 import cssM1Lessons from './css/module-1/lessons';
 import cssM1Quiz from './css/module-1/quiz';
+import reactM1Lessons from './react/module-1/lessons';
+import reactM1Quiz from './react/module-1/quiz';
 
 const allLessons: Record<string, LessonData> = {};
 const allQuizzes: Record<string, QuizData> = {};
@@ -114,8 +117,13 @@ const allQuizzes: Record<string, QuizData> = {};
   allLessons[l.id] = l;
 });
 
+// Register React lessons
+[...reactM1Lessons].forEach((l) => {
+  allLessons[l.id] = l;
+});
+
 // Register quizzes
-[jsM1Quiz, jsM2Quiz, jsM3Quiz, lvM1Quiz, lvM2Quiz, lvM3Quiz, htmlM1Quiz, cssM1Quiz].forEach((q) => {
+[jsM1Quiz, jsM2Quiz, jsM3Quiz, lvM1Quiz, lvM2Quiz, lvM3Quiz, htmlM1Quiz, cssM1Quiz, reactM1Quiz].forEach((q) => {
   allQuizzes[q.id] = q;
 });
 
@@ -132,6 +140,7 @@ export function getCourseMeta(courseId: string): CourseMeta {
   if (courseId === 'laravel') return lvMeta as unknown as CourseMeta;
   if (courseId === 'html') return htmlMeta as unknown as CourseMeta;
   if (courseId === 'css') return cssMeta as unknown as CourseMeta;
+  if (courseId === 'react') return reactMeta as unknown as CourseMeta;
   return jsMeta as unknown as CourseMeta;
 }
 
@@ -149,4 +158,28 @@ export function getModuleLessons(courseId: string, moduleId: string): LessonData
 
 export function getAllLessons(): LessonData[] {
   return Object.values(allLessons);
+}
+
+export function getNextActivityId(courseId: string, currentLessonId: string): { type: 'lesson' | 'quiz' | null; id: string | null } {
+  const meta = getCourseMeta(courseId);
+  if (!meta) return { type: null, id: null };
+  
+  for (let mIdx = 0; mIdx < meta.modules.length; mIdx++) {
+    const mod = meta.modules[mIdx];
+    const lIdx = mod.lessons.indexOf(currentLessonId);
+    if (lIdx !== -1) {
+      if (lIdx + 1 < mod.lessons.length) {
+        return { type: 'lesson', id: mod.lessons[lIdx + 1] };
+      } else if (mod.quizId) {
+        return { type: 'quiz', id: mod.quizId };
+      } else if (mIdx + 1 < meta.modules.length) {
+        const nextMod = meta.modules[mIdx + 1];
+        if (nextMod.lessons.length > 0) {
+          return { type: 'lesson', id: nextMod.lessons[0] };
+        }
+      }
+      return { type: null, id: null };
+    }
+  }
+  return { type: null, id: null };
 }

@@ -1,0 +1,32 @@
+{
+  "id": "react",
+  "title": "React.js",
+  "titleId": "Dasar React.js",
+  "description": "Build interactive user interfaces with React.",
+  "descriptionId": "Bangun antarmuka pengguna interaktif dengan React.",
+  "icon": "⚛️",
+  "color": "#61DAFB",
+  "modules": [
+    {
+      "id": "react-m1",
+      "title": "React Basics",
+      "titleId": "Dasar React",
+      "lessons": ["react-m1-l1", "react-m1-l2", "react-m1-l3"],
+      "quizId": "react-m1-quiz"
+    },
+    {
+      "id": "react-m2",
+      "title": "State & Events",
+      "titleId": "State & Event",
+      "lessons": ["react-m2-l1", "react-m2-l2", "react-m2-l3"],
+      "quizId": "react-m2-quiz"
+    },
+    {
+      "id": "react-m3",
+      "title": "Effects & APIs",
+      "titleId": "Efek & Pengambilan Data",
+      "lessons": ["react-m3-l1", "react-m3-l2", "react-m3-l3"],
+      "quizId": "react-m3-quiz"
+    }
+  ]
+}

@@ -10,7 +10,7 @@ import { useThemeColors, useTranslation } from '@/hooks/useAppTheme';
 import { useSettingsStore } from '@/stores/useSettingsStore';
 import { useUserStore } from '@/stores/useUserStore';
 import { useLessonStore } from '@/stores/useLessonStore';
-import { getLesson } from '@/content/index';
+import { getLesson, getNextActivityId } from '@/content/index';
 import TheorySection from '@/components/lesson/TheorySection';
 import CodeBlock from '@/components/lesson/CodeBlock';
 import { checkBadges, type BadgeNotification } from '@/lib/badgeEngine';
@@ -53,6 +53,7 @@ export default function LessonScreen() {
 
   const title = language === 'id' ? lesson.titleId : lesson.title;
   const hint = language === 'id' ? lesson.practiceHintId : lesson.practiceHint;
+  const nextActivity = getNextActivityId(lesson.courseId, lesson.id);
 
   const handleRunCode = () => {
     try {
@@ -215,15 +216,45 @@ export default function LessonScreen() {
         )}
 
         {/* Complete Button */}
-        <Animated.View entering={FadeInDown.delay(300).duration(400)} style={{ marginTop: 24 }}>
-          <Button
-            title={isCompleted ? '✅ ' + t('learn.completed') : `🎯 ${t('lesson.complete')}`}
-            onPress={handleComplete}
-            variant={isCompleted ? 'secondary' : 'primary'}
-            fullWidth
-            disabled={isCompleted}
-            size="lg"
-          />
+        <Animated.View entering={FadeInDown.delay(300).duration(400)} style={{ marginTop: 24, gap: 12 }}>
+          {!isCompleted ? (
+            <Button
+              title={`🎯 ${t('lesson.complete')}`}
+              onPress={handleComplete}
+              variant="primary"
+              fullWidth
+              size="lg"
+            />
+          ) : (
+            <>
+              <Button
+                title={'✅ ' + t('learn.completed')}
+                onPress={() => {}}
+                variant="secondary"
+                fullWidth
+                disabled
+                size="lg"
+              />
+              {nextActivity.type === 'lesson' && (
+                <Button
+                  title={language === 'id' ? 'Materi Berikutnya →' : 'Next Lesson →'}
+                  onPress={() => router.replace(`/lesson/${nextActivity.id}` as any)}
+                  variant="primary"
+                  fullWidth
+                  size="lg"
+                />
+              )}
+              {nextActivity.type === 'quiz' && (
+                <Button
+                  title={language === 'id' ? 'Mulai Kuis →' : 'Start Quiz →'}
+                  onPress={() => router.replace(`/quiz/${nextActivity.id}` as any)}
+                  variant="primary"
+                  fullWidth
+                  size="lg"
+                />
+              )}
+            </>
+          )}
         </Animated.View>
 
         <View style={{ height: 40 }} />
