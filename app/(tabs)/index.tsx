@@ -38,6 +38,8 @@ export default function HomeScreen() {
   // Calculate real progress from lesson store
   const jsProgress = lessonStore.getCourseProgress('javascript');
   const lvProgress = lessonStore.getCourseProgress('laravel');
+  const htmlProgress = lessonStore.getCourseProgress('html');
+  const cssProgress = lessonStore.getCourseProgress('css');
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
@@ -172,6 +174,30 @@ export default function HomeScreen() {
           color="#FF2D20"
           onPress={() => router.push('/(tabs)/learn' as any)}
           index={1}
+        />
+        <CourseCard
+          courseId="html"
+          icon="📄"
+          title="HTML"
+          description={language === 'id' ? 'Pelajari struktur dasar web' : 'Learn basic web structure'}
+          modules={3}
+          lessons={9}
+          progress={htmlProgress}
+          color="#E34F26"
+          onPress={() => router.push('/(tabs)/learn' as any)}
+          index={2}
+        />
+        <CourseCard
+          courseId="css"
+          icon="🎨"
+          title="CSS"
+          description={language === 'id' ? 'Desain halaman web yang interaktif' : 'Style beautiful web pages'}
+          modules={3}
+          lessons={9}
+          progress={cssProgress}
+          color="#1572B6"
+          onPress={() => router.push('/(tabs)/learn' as any)}
+          index={3}
         />
 
         {/* Bottom spacer */}

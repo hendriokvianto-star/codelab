@@ -83,6 +83,13 @@ import lvM3Quiz from './laravel/module-3/quiz';
 
 import jsMeta from './javascript/meta.json';
 import lvMeta from './laravel/meta.json';
+import htmlMeta from './html/meta.json';
+import cssMeta from './css/meta.json';
+
+import htmlM1Lessons from './html/module-1/lessons';
+import htmlM1Quiz from './html/module-1/quiz';
+import cssM1Lessons from './css/module-1/lessons';
+import cssM1Quiz from './css/module-1/quiz';
 
 const allLessons: Record<string, LessonData> = {};
 const allQuizzes: Record<string, QuizData> = {};
@@ -97,8 +104,18 @@ const allQuizzes: Record<string, QuizData> = {};
   allLessons[l.id] = l;
 });
 
+// Register HTML lessons
+[...htmlM1Lessons].forEach((l) => {
+  allLessons[l.id] = l;
+});
+
+// Register CSS lessons
+[...cssM1Lessons].forEach((l) => {
+  allLessons[l.id] = l;
+});
+
 // Register quizzes
-[jsM1Quiz, jsM2Quiz, jsM3Quiz, lvM1Quiz, lvM2Quiz, lvM3Quiz].forEach((q) => {
+[jsM1Quiz, jsM2Quiz, jsM3Quiz, lvM1Quiz, lvM2Quiz, lvM3Quiz, htmlM1Quiz, cssM1Quiz].forEach((q) => {
   allQuizzes[q.id] = q;
 });
 
@@ -111,7 +128,11 @@ export function getQuiz(quizId: string): QuizData | undefined {
 }
 
 export function getCourseMeta(courseId: string): CourseMeta {
-  return courseId === 'javascript' ? (jsMeta as CourseMeta) : (lvMeta as CourseMeta);
+  if (courseId === 'javascript') return jsMeta as unknown as CourseMeta;
+  if (courseId === 'laravel') return lvMeta as unknown as CourseMeta;
+  if (courseId === 'html') return htmlMeta as unknown as CourseMeta;
+  if (courseId === 'css') return cssMeta as unknown as CourseMeta;
+  return jsMeta as unknown as CourseMeta;
 }
 
 export function getCourseModules(courseId: string): ModuleMeta[] {

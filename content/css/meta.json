@@ -1,0 +1,32 @@
+{
+  "id": "css",
+  "title": "CSS Styling",
+  "titleId": "Desain CSS",
+  "description": "Style and design beautiful web pages",
+  "descriptionId": "Desain halaman web yang indah",
+  "icon": "🎨",
+  "color": "#1572B6",
+  "modules": [
+    {
+      "id": "css-m1",
+      "title": "CSS Basics",
+      "titleId": "Dasar-Dasar CSS",
+      "lessons": ["css-m1-l1", "css-m1-l2", "css-m1-l3"],
+      "quizId": "css-m1-quiz"
+    },
+    {
+      "id": "css-m2",
+      "title": "The Box Model",
+      "titleId": "Mengenal Box Model",
+      "lessons": ["css-m2-l1", "css-m2-l2", "css-m2-l3"],
+      "quizId": "css-m2-quiz"
+    },
+    {
+      "id": "css-m3",
+      "title": "Flexbox Layout",
+      "titleId": "Layout dengan Flexbox",
+      "lessons": ["css-m3-l1", "css-m3-l2", "css-m3-l3"],
+      "quizId": "css-m3-quiz"
+    }
+  ]
+}

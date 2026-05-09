@@ -1,0 +1,32 @@
+{
+  "id": "html",
+  "title": "HTML Fundamentals",
+  "titleId": "Dasar HTML",
+  "description": "Build the structure of web pages",
+  "descriptionId": "Bangun struktur dasar halaman web",
+  "icon": "📄",
+  "color": "#E34F26",
+  "modules": [
+    {
+      "id": "html-m1",
+      "title": "Basic HTML Structure",
+      "titleId": "Struktur Dasar HTML",
+      "lessons": ["html-m1-l1", "html-m1-l2", "html-m1-l3"],
+      "quizId": "html-m1-quiz"
+    },
+    {
+      "id": "html-m2",
+      "title": "Lists, Tables, & Semantics",
+      "titleId": "List, Tabel & Semantik",
+      "lessons": ["html-m2-l1", "html-m2-l2", "html-m2-l3"],
+      "quizId": "html-m2-quiz"
+    },
+    {
+      "id": "html-m3",
+      "title": "Forms & Inputs",
+      "titleId": "Form & Input",
+      "lessons": ["html-m3-l1", "html-m3-l2", "html-m3-l3"],
+      "quizId": "html-m3-quiz"
+    }
+  ]
+}
