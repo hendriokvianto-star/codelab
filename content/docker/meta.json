@@ -5,5 +5,21 @@
   "description": "Learn containerization and basic CI/CD",
   "descriptionId": "Pelajari kontainerisasi dan CI/CD dasar",
   "icon": "🐳",
-  "color": "#2496ED"
+  "color": "#2496ED",
+  "modules": [
+    {
+      "id": "docker-m1",
+      "title": "Introduction to Containers & Docker",
+      "titleId": "Pengenalan Kontainer & Docker",
+      "lessons": ["docker-m1-l1", "docker-m1-l2", "docker-m1-l3"],
+      "quizId": "docker-m1-quiz"
+    },
+    {
+      "id": "docker-m2",
+      "title": "Building Custom Images",
+      "titleId": "Membangun Custom Image",
+      "lessons": ["docker-m2-l1", "docker-m2-l2", "docker-m2-l3"],
+      "quizId": "docker-m2-quiz"
+    }
+  ]
 }
