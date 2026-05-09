@@ -89,8 +89,18 @@ import reactMeta from './react/meta.json';
 
 import htmlM1Lessons from './html/module-1/lessons';
 import htmlM1Quiz from './html/module-1/quiz';
+import htmlM2Lessons from './html/module-2/lessons';
+import htmlM2Quiz from './html/module-2/quiz';
+import htmlM3Lessons from './html/module-3/lessons';
+import htmlM3Quiz from './html/module-3/quiz';
+
 import cssM1Lessons from './css/module-1/lessons';
 import cssM1Quiz from './css/module-1/quiz';
+import cssM2Lessons from './css/module-2/lessons';
+import cssM2Quiz from './css/module-2/quiz';
+import cssM3Lessons from './css/module-3/lessons';
+import cssM3Quiz from './css/module-3/quiz';
+
 import reactM1Lessons from './react/module-1/lessons';
 import reactM1Quiz from './react/module-1/quiz';
 import reactM2Lessons from './react/module-2/lessons';
@@ -112,12 +122,12 @@ const allQuizzes: Record<string, QuizData> = {};
 });
 
 // Register HTML lessons
-[...htmlM1Lessons].forEach((l) => {
+[...htmlM1Lessons, ...htmlM2Lessons, ...htmlM3Lessons].forEach((l) => {
   allLessons[l.id] = l;
 });
 
 // Register CSS lessons
-[...cssM1Lessons].forEach((l) => {
+[...cssM1Lessons, ...cssM2Lessons, ...cssM3Lessons].forEach((l) => {
   allLessons[l.id] = l;
 });
 
@@ -127,7 +137,13 @@ const allQuizzes: Record<string, QuizData> = {};
 });
 
 // Register quizzes
-[jsM1Quiz, jsM2Quiz, jsM3Quiz, lvM1Quiz, lvM2Quiz, lvM3Quiz, htmlM1Quiz, cssM1Quiz, reactM1Quiz, reactM2Quiz, reactM3Quiz].forEach((q) => {
+[
+  jsM1Quiz, jsM2Quiz, jsM3Quiz, 
+  lvM1Quiz, lvM2Quiz, lvM3Quiz, 
+  htmlM1Quiz, htmlM2Quiz, htmlM3Quiz, 
+  cssM1Quiz, cssM2Quiz, cssM3Quiz, 
+  reactM1Quiz, reactM2Quiz, reactM3Quiz
+].forEach((q) => {
   allQuizzes[q.id] = q;
 });
 
