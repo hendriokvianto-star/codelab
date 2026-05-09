@@ -180,6 +180,10 @@ import dockerM2Quiz from './docker/module-2/quiz';
 import dockerM3Lessons from './docker/module-3/lessons';
 import dockerM3Quiz from './docker/module-3/quiz';
 
+import mongodbMeta from './mongodb/meta.json';
+import mongodbM1Lessons from './mongodb/module-1/lessons';
+import mongodbM1Quiz from './mongodb/module-1/quiz';
+
 // Combine all content into a central database
 
 const allLessons: Record<string, LessonData> = {};
@@ -255,6 +259,11 @@ const allQuizzes: Record<string, QuizData> = {};
   allLessons[l.id] = l;
 });
 
+// Register MongoDB lessons
+[...mongodbM1Lessons].forEach((l) => {
+  allLessons[l.id] = l;
+});
+
 // Register quizzes
 [
   jsM1Quiz, jsM2Quiz, jsM3Quiz, 
@@ -270,7 +279,8 @@ const allQuizzes: Record<string, QuizData> = {};
   reactnativeM1Quiz, reactnativeM2Quiz, reactnativeM3Quiz,
   typescriptM1Quiz, typescriptM2Quiz, typescriptM3Quiz,
   nextjsM1Quiz, nextjsM2Quiz, nextjsM3Quiz,
-  dockerM1Quiz, dockerM2Quiz, dockerM3Quiz
+  dockerM1Quiz, dockerM2Quiz, dockerM3Quiz,
+  mongodbM1Quiz
 ].forEach((q) => {
   allQuizzes[q.id] = q;
 });
@@ -298,6 +308,7 @@ export function getCourseMeta(courseId: string): CourseMeta {
   if (courseId === 'typescript') return typescriptMeta as unknown as CourseMeta;
   if (courseId === 'nextjs') return nextjsMeta as unknown as CourseMeta;
   if (courseId === 'docker') return dockerMeta as unknown as CourseMeta;
+  if (courseId === 'mongodb') return mongodbMeta as unknown as CourseMeta;
   return jsMeta as unknown as CourseMeta;
 }
 

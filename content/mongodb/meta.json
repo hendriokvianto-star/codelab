@@ -1,0 +1,18 @@
+{
+  "id": "mongodb",
+  "title": "MongoDB",
+  "titleId": "MongoDB",
+  "description": "Learn NoSQL document database",
+  "descriptionId": "Pelajari database dokumen NoSQL",
+  "icon": "🍃",
+  "color": "#47A248",
+  "modules": [
+    {
+      "id": "mongodb-m1",
+      "title": "Intro to NoSQL & MongoDB",
+      "titleId": "Pengenalan NoSQL & MongoDB",
+      "lessons": ["mongodb-m1-l1", "mongodb-m1-l2", "mongodb-m1-l3"],
+      "quizId": "mongodb-m1-quiz"
+    }
+  ]
+}
