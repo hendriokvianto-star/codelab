@@ -11,7 +11,7 @@ import { useSettingsStore } from '@/stores/useSettingsStore';
 import { useLessonStore } from '@/stores/useLessonStore';
 import { getLesson } from '@/content/index';
 import { useUserStore } from '@/stores/useUserStore';
-import { getLevelFromXP } from '@/constants/Gamification';
+import { getLevelFromXP, BADGES } from '@/constants/Gamification';
 import Card from '@/components/ui/Card';
 import ProgressBar from '@/components/ui/ProgressBar';
 
@@ -108,6 +108,38 @@ export default function ProfileScreen() {
               <StatItem emoji="⚔️" label={t('profile.challenges_solved')} value={challengesSolved} color={colors.info} />
               <StatItem emoji="🎖️" label="Badges" value={earnedBadges.length} color={colors.primary} />
               <StatItem emoji="📈" label="Level" value={levelInfo.level} color={colors.levelColor} />
+            </View>
+          </Card>
+        </Animated.View>
+
+        {/* Badge Showcase */}
+        <Animated.View entering={FadeInDown.delay(150).duration(400)}>
+          <Card elevated style={styles.badgeCard}>
+            <Text style={[styles.sectionTitle, { color: colors.text }]}>
+              🎖️ {language === 'id' ? 'Koleksi Lencana' : 'Badge Collection'} ({earnedBadges.length}/{Object.keys(BADGES).length})
+            </Text>
+            <View style={styles.badgeGrid}>
+              {Object.values(BADGES).map((badge) => {
+                const isEarned = earnedBadges.includes(badge.id);
+                return (
+                  <View key={badge.id} style={[styles.badgeItem, !isEarned && { opacity: 0.5 }]}>
+                    <View style={[
+                      styles.badgeIconWrapper, 
+                      { 
+                        backgroundColor: isEarned ? colors.primary + '20' : colors.border,
+                        borderColor: isEarned ? colors.primary + '40' : colors.border 
+                      }
+                    ]}>
+                      <Text style={[styles.badgeEmoji, !isEarned && { fontSize: 20 }]}>
+                        {isEarned ? badge.emoji : '🔒'}
+                      </Text>
+                    </View>
+                    <Text style={[styles.badgeName, { color: colors.text }]} numberOfLines={2}>
+                      {language === 'id' ? badge.nameId : badge.name}
+                    </Text>
+                  </View>
+                );
+              })}
             </View>
           </Card>
         </Animated.View>
@@ -308,4 +340,17 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   dangerText: { fontSize: 14, fontWeight: '700' },
+  badgeCard: { marginBottom: 16 },
+  badgeGrid: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' },
+  badgeItem: { width: '23%', alignItems: 'center', marginBottom: 16, gap: 6 },
+  badgeIconWrapper: {
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1.5,
+  },
+  badgeEmoji: { fontSize: 28 },
+  badgeName: { fontSize: 10, textAlign: 'center', fontWeight: '600', lineHeight: 14 },
 });
