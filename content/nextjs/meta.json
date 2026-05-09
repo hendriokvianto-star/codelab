@@ -1,0 +1,32 @@
+{
+  "id": "nextjs",
+  "title": "Next.js",
+  "titleId": "Next.js",
+  "description": "The React Framework for the Web",
+  "descriptionId": "Framework React untuk Web",
+  "icon": "⬛",
+  "color": "#111111",
+  "modules": [
+    {
+      "id": "next-m1",
+      "title": "App Router",
+      "titleId": "Routing App",
+      "lessons": ["next-m1-l1", "next-m1-l2", "next-m1-l3"],
+      "quizId": "next-m1-quiz"
+    },
+    {
+      "id": "next-m2",
+      "title": "Server & Client",
+      "titleId": "Server & Client",
+      "lessons": ["next-m2-l1", "next-m2-l2", "next-m2-l3"],
+      "quizId": "next-m2-quiz"
+    },
+    {
+      "id": "next-m3",
+      "title": "Data Fetching",
+      "titleId": "Mengambil Data",
+      "lessons": ["next-m3-l1", "next-m3-l2", "next-m3-l3"],
+      "quizId": "next-m3-quiz"
+    }
+  ]
+}

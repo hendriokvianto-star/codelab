@@ -164,6 +164,14 @@ import typescriptM2Quiz from './typescript/module-2/quiz';
 import typescriptM3Lessons from './typescript/module-3/lessons';
 import typescriptM3Quiz from './typescript/module-3/quiz';
 
+import nextjsMeta from './nextjs/meta.json';
+import nextjsM1Lessons from './nextjs/module-1/lessons';
+import nextjsM1Quiz from './nextjs/module-1/quiz';
+import nextjsM2Lessons from './nextjs/module-2/lessons';
+import nextjsM2Quiz from './nextjs/module-2/quiz';
+import nextjsM3Lessons from './nextjs/module-3/lessons';
+import nextjsM3Quiz from './nextjs/module-3/quiz';
+
 const allLessons: Record<string, LessonData> = {};
 const allQuizzes: Record<string, QuizData> = {};
 
@@ -227,6 +235,11 @@ const allQuizzes: Record<string, QuizData> = {};
   allLessons[l.id] = l;
 });
 
+// Register Next.js lessons
+[...nextjsM1Lessons, ...nextjsM2Lessons, ...nextjsM3Lessons].forEach((l) => {
+  allLessons[l.id] = l;
+});
+
 // Register quizzes
 [
   jsM1Quiz, jsM2Quiz, jsM3Quiz, 
@@ -240,7 +253,8 @@ const allQuizzes: Record<string, QuizData> = {};
   gitM1Quiz, gitM2Quiz, gitM3Quiz,
   pythonM1Quiz, pythonM2Quiz, pythonM3Quiz,
   reactnativeM1Quiz, reactnativeM2Quiz, reactnativeM3Quiz,
-  typescriptM1Quiz, typescriptM2Quiz, typescriptM3Quiz
+  typescriptM1Quiz, typescriptM2Quiz, typescriptM3Quiz,
+  nextjsM1Quiz, nextjsM2Quiz, nextjsM3Quiz
 ].forEach((q) => {
   allQuizzes[q.id] = q;
 });
@@ -266,6 +280,7 @@ export function getCourseMeta(courseId: string): CourseMeta {
   if (courseId === 'python') return pythonMeta as unknown as CourseMeta;
   if (courseId === 'reactnative') return reactnativeMeta as unknown as CourseMeta;
   if (courseId === 'typescript') return typescriptMeta as unknown as CourseMeta;
+  if (courseId === 'nextjs') return nextjsMeta as unknown as CourseMeta;
   return jsMeta as unknown as CourseMeta;
 }
 

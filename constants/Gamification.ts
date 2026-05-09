@@ -269,6 +269,22 @@ export const BADGES = {
     descriptionId: 'Selesaikan semua module TypeScript',
     emoji: '🗡️',
   },
+  NEXT_STARTER: {
+    id: 'next_starter',
+    name: 'Next Starter',
+    nameId: 'Pemula Next',
+    description: 'Complete Next.js Module 1',
+    descriptionId: 'Selesaikan Module 1 Next.js',
+    emoji: '⬛',
+  },
+  NEXT_GEN_DEV: {
+    id: 'next_gen_dev',
+    name: 'Next-Gen Dev',
+    nameId: 'Dev Masa Depan',
+    description: 'Complete all Next.js modules',
+    descriptionId: 'Selesaikan semua module Next.js',
+    emoji: '⚡',
+  },
   PERFECT_SCORE: {
     id: 'perfect_score',
     name: 'Perfect Score',

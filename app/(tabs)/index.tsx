@@ -48,6 +48,7 @@ export default function HomeScreen() {
   const pythonProgress = lessonStore.getCourseProgress('python');
   const rnProgress = lessonStore.getCourseProgress('reactnative');
   const tsProgress = lessonStore.getCourseProgress('typescript');
+  const nextProgress = lessonStore.getCourseProgress('nextjs');
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
@@ -302,6 +303,18 @@ export default function HomeScreen() {
           color="#3178C6"
           onPress={() => router.push('/(tabs)/learn' as any)}
           index={11}
+        />
+        <CourseCard
+          courseId="nextjs"
+          icon="⬛"
+          title="Next.js"
+          description={language === 'id' ? 'Framework React untuk Web' : 'The React Framework for the Web'}
+          modules={3}
+          lessons={9}
+          progress={nextProgress}
+          color="#111111"
+          onPress={() => router.push('/(tabs)/learn' as any)}
+          index={12}
         />
 
         {/* Bottom spacer */}

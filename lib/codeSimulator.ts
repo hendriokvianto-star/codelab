@@ -154,6 +154,30 @@ export function simulateCode(courseId: string, execCode: string): string {
     } else {
       logs.push('No code provided.');
     }
+  } else if (courseId === 'nextjs') {
+    // Next.js Mock Simulator
+    if (execCode.trim().length > 0) {
+      logs.push(`[Next.js Compiler] Building route...`);
+      
+      if (execCode.includes('"use client"') || execCode.includes("'use client'")) {
+        logs.push(`⚠️ "use client" directive detected.`);
+        logs.push(`[Client-Side] Hydrating React components in browser.`);
+        if (execCode.includes('onClick') || execCode.includes('useState')) {
+          logs.push(`✅ Interactive Client Component loaded.`);
+        }
+      } else {
+        logs.push(`[Server-Side] Rendered HTML instantaneously (SSR).`);
+        if (execCode.includes('async function') && execCode.includes('await fetch')) {
+          logs.push(`✅ Async Server Component fetching data efficiently.`);
+        } else if (execCode.includes('export async function GET()') || execCode.includes('export async function POST()')) {
+          logs.push(`✅ Route Handler (API endpoint) deployed successfully.`);
+        } else if (execCode.includes('export const metadata')) {
+          logs.push(`✅ SEO Metadata tags dynamically injected into <head>.`);
+        }
+      }
+    } else {
+      logs.push('No code provided.');
+    }
   } else if (courseId === 'laravel' || execCode.includes('<?php')) {
     // For PHP, we simulate output
     const echoMatch = execCode.match(/echo\s+["'](.+?)["']/g);
