@@ -64,7 +64,8 @@ export default function HomeScreen() {
     { id: 'python', icon: '🐍', title: 'Dasar Python', desc: language === 'id' ? 'Pelajari bahasa pemrograman terpopuler' : 'Learn the world\'s most popular language', category: 'Fundamental', color: '#3776AB', modules: 3, lessons: 9 },
     { id: 'reactnative', icon: '📱', title: 'React Native', desc: language === 'id' ? 'Bangun aplikasi mobile dengan React' : 'Build mobile apps with React', category: 'Mobile', color: '#06B6D4', modules: 3, lessons: 9 },
     { id: 'typescript', icon: '📘', title: 'TypeScript', desc: language === 'id' ? 'JavaScript dengan sintaks penulisan tipe' : 'JavaScript with syntax for types', category: 'Frontend', color: '#3178C6', modules: 3, lessons: 9 },
-    { id: 'nextjs', icon: '⬛', title: 'Next.js', desc: language === 'id' ? 'Framework React untuk Web' : 'The React Framework for the Web', category: 'Frontend', color: '#111111', modules: 3, lessons: 9 }
+    { id: 'nextjs', icon: '⬛', title: 'Next.js', desc: language === 'id' ? 'Framework React untuk Web' : 'The React Framework for the Web', category: 'Frontend', color: '#111111', modules: 3, lessons: 9 },
+    { id: 'docker', icon: '🐳', title: 'Docker & DevOps', desc: language === 'id' ? 'Pelajari kontainerisasi dan CI/CD dasar' : 'Learn containerization and basic CI/CD', category: 'DevOps', color: '#2496ED', modules: 1, lessons: 3 }
   ];
 
   const filteredCourses = COURSES.filter(c => {

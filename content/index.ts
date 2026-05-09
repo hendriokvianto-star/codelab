@@ -172,6 +172,12 @@ import nextjsM2Quiz from './nextjs/module-2/quiz';
 import nextjsM3Lessons from './nextjs/module-3/lessons';
 import nextjsM3Quiz from './nextjs/module-3/quiz';
 
+import dockerMeta from './docker/meta.json';
+import dockerM1Lessons from './docker/module-1/lessons';
+import dockerM1Quiz from './docker/module-1/quiz';
+
+// Combine all content into a central database
+
 const allLessons: Record<string, LessonData> = {};
 const allQuizzes: Record<string, QuizData> = {};
 
@@ -240,6 +246,11 @@ const allQuizzes: Record<string, QuizData> = {};
   allLessons[l.id] = l;
 });
 
+// Register Docker lessons
+[...dockerM1Lessons].forEach((l) => {
+  allLessons[l.id] = l;
+});
+
 // Register quizzes
 [
   jsM1Quiz, jsM2Quiz, jsM3Quiz, 
@@ -254,7 +265,8 @@ const allQuizzes: Record<string, QuizData> = {};
   pythonM1Quiz, pythonM2Quiz, pythonM3Quiz,
   reactnativeM1Quiz, reactnativeM2Quiz, reactnativeM3Quiz,
   typescriptM1Quiz, typescriptM2Quiz, typescriptM3Quiz,
-  nextjsM1Quiz, nextjsM2Quiz, nextjsM3Quiz
+  nextjsM1Quiz, nextjsM2Quiz, nextjsM3Quiz,
+  dockerM1Quiz
 ].forEach((q) => {
   allQuizzes[q.id] = q;
 });
@@ -281,6 +293,7 @@ export function getCourseMeta(courseId: string): CourseMeta {
   if (courseId === 'reactnative') return reactnativeMeta as unknown as CourseMeta;
   if (courseId === 'typescript') return typescriptMeta as unknown as CourseMeta;
   if (courseId === 'nextjs') return nextjsMeta as unknown as CourseMeta;
+  if (courseId === 'docker') return dockerMeta as unknown as CourseMeta;
   return jsMeta as unknown as CourseMeta;
 }
 

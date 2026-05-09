@@ -1,0 +1,9 @@
+{
+  "id": "docker",
+  "title": "Docker & DevOps",
+  "titleId": "Docker & DevOps",
+  "description": "Learn containerization and basic CI/CD",
+  "descriptionId": "Pelajari kontainerisasi dan CI/CD dasar",
+  "icon": "🐳",
+  "color": "#2496ED"
+}
