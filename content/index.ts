@@ -93,6 +93,10 @@ import cssM1Lessons from './css/module-1/lessons';
 import cssM1Quiz from './css/module-1/quiz';
 import reactM1Lessons from './react/module-1/lessons';
 import reactM1Quiz from './react/module-1/quiz';
+import reactM2Lessons from './react/module-2/lessons';
+import reactM2Quiz from './react/module-2/quiz';
+import reactM3Lessons from './react/module-3/lessons';
+import reactM3Quiz from './react/module-3/quiz';
 
 const allLessons: Record<string, LessonData> = {};
 const allQuizzes: Record<string, QuizData> = {};
@@ -118,12 +122,12 @@ const allQuizzes: Record<string, QuizData> = {};
 });
 
 // Register React lessons
-[...reactM1Lessons].forEach((l) => {
+[...reactM1Lessons, ...reactM2Lessons, ...reactM3Lessons].forEach((l) => {
   allLessons[l.id] = l;
 });
 
 // Register quizzes
-[jsM1Quiz, jsM2Quiz, jsM3Quiz, lvM1Quiz, lvM2Quiz, lvM3Quiz, htmlM1Quiz, cssM1Quiz, reactM1Quiz].forEach((q) => {
+[jsM1Quiz, jsM2Quiz, jsM3Quiz, lvM1Quiz, lvM2Quiz, lvM3Quiz, htmlM1Quiz, cssM1Quiz, reactM1Quiz, reactM2Quiz, reactM3Quiz].forEach((q) => {
   allQuizzes[q.id] = q;
 });
 
