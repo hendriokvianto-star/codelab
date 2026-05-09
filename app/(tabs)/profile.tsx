@@ -65,7 +65,7 @@ export default function ProfileScreen() {
   const setLanguage = useSettingsStore((s) => s.setLanguage);
 
   const totalXP = useUserStore((s) => s.totalXP);
-  const streakDays = useUserStore((s) => s.streakDays);
+  const currentStreak = useUserStore((s) => s.currentStreak);
   const lessonsCompleted = useUserStore((s) => s.lessonsCompleted);
   const challengesSolved = useUserStore((s) => s.challengesSolved);
   const earnedBadges = useUserStore((s) => s.earnedBadges);
@@ -103,7 +103,7 @@ export default function ProfileScreen() {
             </Text>
             <View style={styles.statsGrid}>
               <StatItem emoji="⭐" label="Total XP" value={totalXP} color={colors.xpColor} />
-              <StatItem emoji="🔥" label={t('streak.title')} value={streakDays} color={colors.streakColor} />
+              <StatItem emoji="🔥" label={t('streak.title')} value={currentStreak} color={colors.streakColor} />
               <StatItem emoji="📖" label={t('profile.lessons_completed')} value={lessonsCompleted} color={colors.success} />
               <StatItem emoji="⚔️" label={t('profile.challenges_solved')} value={challengesSolved} color={colors.info} />
               <StatItem emoji="🎖️" label="Badges" value={earnedBadges.length} color={colors.primary} />

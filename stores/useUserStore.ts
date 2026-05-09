@@ -23,12 +23,14 @@ interface UserStats {
 interface UserState extends UserStats {
   // Computed
   levelInfo: ReturnType<typeof getLevelFromXP>;
+  currentStreak: number;
 
   // Actions
   addXP: (amount: number) => void;
   incrementLessonsCompleted: () => void;
   incrementChallengesSolved: () => void;
   updateStreak: () => void;
+  loginToday: () => boolean;
   earnBadge: (badgeId: string) => void;
   completeOnboarding: () => void;
   resetProgress: () => void;
@@ -48,6 +50,19 @@ const storeCreator = (set: any, get: any) => ({
 
   get levelInfo() {
     return getLevelFromXP(get().totalXP);
+  },
+
+  get currentStreak() {
+    const today = getToday();
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    const yesterdayStr = yesterday.toISOString().split('T')[0];
+    const lastActive = get().lastActiveDate;
+
+    if (lastActive === today || lastActive === yesterdayStr) {
+      return get().streakDays;
+    }
+    return 0;
   },
 
   addXP: (amount: number) =>
@@ -73,6 +88,20 @@ const storeCreator = (set: any, get: any) => ({
       const newStreak = state.lastActiveDate === yesterdayStr ? state.streakDays + 1 : 1;
       return { streakDays: newStreak, lastActiveDate: today };
     }),
+
+  loginToday: () => {
+    const state = get();
+    const today = getToday();
+    if (state.lastActiveDate === today) return false;
+
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    const yesterdayStr = yesterday.toISOString().split('T')[0];
+    const newStreak = state.lastActiveDate === yesterdayStr ? state.streakDays + 1 : 1;
+
+    set({ streakDays: newStreak, lastActiveDate: today });
+    return true; // Return true if streak was updated today
+  },
 
   earnBadge: (badgeId: string) =>
     set((state: UserStats) => {

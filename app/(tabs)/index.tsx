@@ -2,9 +2,9 @@
  * CodeLab — Home Screen (Fase 4)
  * Dashboard with search, streak, XP, daily challenge, and course cards
  */
-import React, { useState } from 'react';
-import { StyleSheet, View, Text, ScrollView, StatusBar, Pressable, Platform, TextInput } from 'react-native';
-import Animated, { FadeInDown } from 'react-native-reanimated';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, View, Text, ScrollView, StatusBar, Pressable, Platform, TextInput, Modal } from 'react-native';
+import Animated, { FadeInDown, BounceIn } from 'react-native-reanimated';
 import { useRouter, Redirect } from 'expo-router';
 import { useThemeColors, useTranslation } from '@/hooks/useAppTheme';
 import { useUserStore } from '@/stores/useUserStore';
@@ -24,8 +24,18 @@ export default function HomeScreen() {
   const { t, language } = useTranslation();
   const isDarkMode = useSettingsStore((s) => s.isDarkMode);
   const router = useRouter();
-  const { totalXP, lessonsCompleted, challengesSolved, streakDays } = useUserStore();
+  const { totalXP, lessonsCompleted, challengesSolved, currentStreak, loginToday } = useUserStore();
   const lessonStore = useLessonStore();
+  const [showStreakModal, setShowStreakModal] = useState(false);
+
+  useEffect(() => {
+    if (hasCompletedOnboarding && Platform.OS !== 'web') {
+      const streakUpdated = loginToday();
+      if (streakUpdated) {
+        setShowStreakModal(true);
+      }
+    }
+  }, [hasCompletedOnboarding, loginToday]);
 
   // Gate: redirect to onboarding if first-time user (native only — web SSR breaks touch events)
   if (!hasCompletedOnboarding && Platform.OS !== 'web') {
@@ -105,7 +115,7 @@ export default function HomeScreen() {
             </View>
             <View style={[styles.quickStat, { backgroundColor: colors.surface, borderColor: colors.border }]}>
               <Text style={styles.quickStatEmoji}>🔥</Text>
-              <Text style={[styles.quickStatValue, { color: colors.error }]}>{streakDays}</Text>
+              <Text style={[styles.quickStatValue, { color: colors.error }]}>{currentStreak}</Text>
               <Text style={[styles.quickStatLabel, { color: colors.textMuted }]}>
                 {language === 'id' ? 'Hari' : 'Days'}
               </Text>
@@ -245,6 +255,31 @@ export default function HomeScreen() {
         {/* Bottom spacer */}
         <View style={{ height: 32 }} />
       </ScrollView>
+
+      {/* Daily Streak Modal */}
+      <Modal transparent visible={showStreakModal} animationType="fade">
+        <View style={styles.modalOverlay}>
+          <Animated.View entering={BounceIn.duration(600)} style={[styles.modalContent, { backgroundColor: colors.background, borderColor: colors.border }]}>
+            <Text style={{ fontSize: 64, marginBottom: 16 }}>🔥</Text>
+            <Text style={[styles.modalTitle, { color: colors.text }]}>
+              {language === 'id' ? 'Streak Hari ke-' : 'Day '}{currentStreak}{language === 'id' ? '!' : ' Streak!'}
+            </Text>
+            <Text style={[styles.modalText, { color: colors.textSecondary }]}>
+              {language === 'id' 
+                ? 'Luar biasa! Kamu kembali belajar hari ini. Teruskan semangatmu!' 
+                : 'Awesome! You came back to learn today. Keep up the momentum!'}
+            </Text>
+            <Pressable 
+              style={[styles.modalBtn, { backgroundColor: colors.primary }]}
+              onPress={() => setShowStreakModal(false)}
+            >
+              <Text style={styles.modalBtnText}>
+                {language === 'id' ? 'Lanjutkan Belajar' : 'Continue Learning'}
+              </Text>
+            </Pressable>
+          </Animated.View>
+        </View>
+      </Modal>
     </View>
   );
 }
@@ -342,5 +377,49 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     borderRadius: 20,
     borderWidth: 1,
+  },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  modalContent: {
+    width: '100%',
+    maxWidth: 340,
+    borderRadius: 24,
+    padding: 24,
+    alignItems: 'center',
+    borderWidth: 1,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.1,
+    shadowRadius: 20,
+    elevation: 10,
+  },
+  modalTitle: {
+    fontSize: 24,
+    fontWeight: '800',
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+  modalText: {
+    fontSize: 15,
+    textAlign: 'center',
+    marginBottom: 24,
+    lineHeight: 22,
+  },
+  modalBtn: {
+    paddingVertical: 14,
+    paddingHorizontal: 24,
+    borderRadius: 16,
+    width: '100%',
+    alignItems: 'center',
+  },
+  modalBtnText: {
+    color: '#FFF',
+    fontSize: 16,
+    fontWeight: '700',
   },
 });
