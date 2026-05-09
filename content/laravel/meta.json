@@ -1,0 +1,67 @@
+{
+  "id": "laravel",
+  "title": "Laravel",
+  "titleId": "Laravel",
+  "description": "Build powerful web apps with PHP",
+  "descriptionId": "Bangun aplikasi web powerful dengan PHP",
+  "icon": "🔺",
+  "color": "#FF2D20",
+  "modules": [
+    {
+      "id": "lv-m1",
+      "title": "Intro to PHP & Laravel",
+      "titleId": "Pengenalan PHP & Laravel",
+      "lessons": ["lv-m1-l1", "lv-m1-l2", "lv-m1-l3", "lv-m1-l4"],
+      "quizId": "lv-m1-quiz"
+    },
+    {
+      "id": "lv-m2",
+      "title": "Routing & Controllers",
+      "titleId": "Routing & Controller",
+      "lessons": ["lv-m2-l1", "lv-m2-l2", "lv-m2-l3", "lv-m2-l4"],
+      "quizId": "lv-m2-quiz"
+    },
+    {
+      "id": "lv-m3",
+      "title": "Blade Templates",
+      "titleId": "Template Blade",
+      "lessons": ["lv-m3-l1", "lv-m3-l2", "lv-m3-l3", "lv-m3-l4"],
+      "quizId": "lv-m3-quiz"
+    },
+    {
+      "id": "lv-m4",
+      "title": "Database & Eloquent",
+      "titleId": "Database & Eloquent",
+      "lessons": ["lv-m4-l1", "lv-m4-l2", "lv-m4-l3", "lv-m4-l4", "lv-m4-l5"],
+      "quizId": "lv-m4-quiz"
+    },
+    {
+      "id": "lv-m5",
+      "title": "Forms & Validation",
+      "titleId": "Form & Validasi",
+      "lessons": ["lv-m5-l1", "lv-m5-l2", "lv-m5-l3", "lv-m5-l4"],
+      "quizId": "lv-m5-quiz"
+    },
+    {
+      "id": "lv-m6",
+      "title": "Authentication",
+      "titleId": "Autentikasi",
+      "lessons": ["lv-m6-l1", "lv-m6-l2", "lv-m6-l3", "lv-m6-l4"],
+      "quizId": "lv-m6-quiz"
+    },
+    {
+      "id": "lv-m7",
+      "title": "API Development",
+      "titleId": "Pengembangan API",
+      "lessons": ["lv-m7-l1", "lv-m7-l2", "lv-m7-l3", "lv-m7-l4"],
+      "quizId": "lv-m7-quiz"
+    },
+    {
+      "id": "lv-m8",
+      "title": "Final Project",
+      "titleId": "Proyek Akhir",
+      "lessons": ["lv-m8-l1"],
+      "quizId": null
+    }
+  ]
+}
