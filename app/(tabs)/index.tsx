@@ -43,6 +43,7 @@ export default function HomeScreen() {
   const reactProgress = lessonStore.getCourseProgress('react');
   const sqlProgress = lessonStore.getCourseProgress('sql');
   const tailwindProgress = lessonStore.getCourseProgress('tailwind');
+  const nodejsProgress = lessonStore.getCourseProgress('nodejs');
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
@@ -237,6 +238,18 @@ export default function HomeScreen() {
           color="#0ED3CF"
           onPress={() => router.push('/(tabs)/learn' as any)}
           index={6}
+        />
+        <CourseCard
+          courseId="nodejs"
+          icon="🟢"
+          title="Node.js & Express"
+          description={language === 'id' ? 'Bangun backend API yang cepat dan skalabel' : 'Build fast and scalable backend APIs'}
+          modules={3}
+          lessons={9}
+          progress={nodejsProgress}
+          color="#68A063"
+          onPress={() => router.push('/(tabs)/learn' as any)}
+          index={7}
         />
 
         {/* Bottom spacer */}

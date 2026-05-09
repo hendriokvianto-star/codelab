@@ -98,6 +98,25 @@ export default function LessonScreen() {
         } else {
           logs.push('No code provided.');
         }
+      } else if (lesson.courseId === 'nodejs') {
+        // Node.js mock simulator
+        if (execCode.trim().length > 0) {
+          logs.push(`[Node.js Server Simulation]`);
+          if (execCode.includes('app.listen')) {
+            logs.push(`Server started and listening for connections...`);
+          } else if (execCode.includes('app.get') || execCode.includes('app.post') || execCode.includes('app.put') || execCode.includes('app.delete')) {
+            logs.push(`Route registered successfully.`);
+            if (execCode.includes('res.json')) {
+              logs.push(`(Simulating Request) -> Responded with JSON object.`);
+            } else if (execCode.includes('res.send')) {
+              logs.push(`(Simulating Request) -> Responded with text/html.`);
+            }
+          } else {
+            logs.push(`Code executed without server crashes.`);
+          }
+        } else {
+          logs.push('No code provided.');
+        }
       } else if (lesson.courseId === 'laravel' || execCode.includes('<?php')) {
         // For PHP, we simulate output
         const echoMatch = execCode.match(/echo\s+["'](.+?)["']/g);

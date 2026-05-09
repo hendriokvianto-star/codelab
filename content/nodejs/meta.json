@@ -1,0 +1,32 @@
+{
+  "id": "nodejs",
+  "title": "Node.js & Express",
+  "titleId": "Node.js & Express",
+  "description": "Build fast and scalable backend APIs",
+  "descriptionId": "Bangun backend API yang cepat dan skalabel",
+  "icon": "🟢",
+  "color": "#68A063",
+  "modules": [
+    {
+      "id": "nodejs-m1",
+      "title": "Server & Basics",
+      "titleId": "Server & Dasar",
+      "lessons": ["nodejs-m1-l1", "nodejs-m1-l2", "nodejs-m1-l3"],
+      "quizId": "nodejs-m1-quiz"
+    },
+    {
+      "id": "nodejs-m2",
+      "title": "Routes & Middleware",
+      "titleId": "Route & Middleware",
+      "lessons": ["nodejs-m2-l1", "nodejs-m2-l2", "nodejs-m2-l3"],
+      "quizId": "nodejs-m2-quiz"
+    },
+    {
+      "id": "nodejs-m3",
+      "title": "REST APIs",
+      "titleId": "REST APIs",
+      "lessons": ["nodejs-m3-l1", "nodejs-m3-l2", "nodejs-m3-l3"],
+      "quizId": "nodejs-m3-quiz"
+    }
+  ]
+}

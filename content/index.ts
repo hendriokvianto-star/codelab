@@ -124,6 +124,14 @@ import tailwindM2Quiz from './tailwind/module-2/quiz';
 import tailwindM3Lessons from './tailwind/module-3/lessons';
 import tailwindM3Quiz from './tailwind/module-3/quiz';
 
+import nodejsMeta from './nodejs/meta.json';
+import nodejsM1Lessons from './nodejs/module-1/lessons';
+import nodejsM1Quiz from './nodejs/module-1/quiz';
+import nodejsM2Lessons from './nodejs/module-2/lessons';
+import nodejsM2Quiz from './nodejs/module-2/quiz';
+import nodejsM3Lessons from './nodejs/module-3/lessons';
+import nodejsM3Quiz from './nodejs/module-3/quiz';
+
 const allLessons: Record<string, LessonData> = {};
 const allQuizzes: Record<string, QuizData> = {};
 
@@ -162,6 +170,11 @@ const allQuizzes: Record<string, QuizData> = {};
   allLessons[l.id] = l;
 });
 
+// Register Node.js lessons
+[...nodejsM1Lessons, ...nodejsM2Lessons, ...nodejsM3Lessons].forEach((l) => {
+  allLessons[l.id] = l;
+});
+
 // Register quizzes
 [
   jsM1Quiz, jsM2Quiz, jsM3Quiz, 
@@ -170,7 +183,8 @@ const allQuizzes: Record<string, QuizData> = {};
   cssM1Quiz, cssM2Quiz, cssM3Quiz, 
   reactM1Quiz, reactM2Quiz, reactM3Quiz,
   sqlM1Quiz, sqlM2Quiz, sqlM3Quiz,
-  tailwindM1Quiz, tailwindM2Quiz, tailwindM3Quiz
+  tailwindM1Quiz, tailwindM2Quiz, tailwindM3Quiz,
+  nodejsM1Quiz, nodejsM2Quiz, nodejsM3Quiz
 ].forEach((q) => {
   allQuizzes[q.id] = q;
 });
@@ -191,6 +205,7 @@ export function getCourseMeta(courseId: string): CourseMeta {
   if (courseId === 'react') return reactMeta as unknown as CourseMeta;
   if (courseId === 'sql') return sqlMeta as unknown as CourseMeta;
   if (courseId === 'tailwind') return tailwindMeta as unknown as CourseMeta;
+  if (courseId === 'nodejs') return nodejsMeta as unknown as CourseMeta;
   return jsMeta as unknown as CourseMeta;
 }
 

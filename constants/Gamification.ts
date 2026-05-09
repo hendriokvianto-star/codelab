@@ -189,6 +189,22 @@ export const BADGES = {
     descriptionId: 'Selesaikan semua module Tailwind',
     emoji: '💨',
   },
+  NODE_STARTER: {
+    id: 'node_starter',
+    name: 'Node Starter',
+    nameId: 'Pemula Node',
+    description: 'Complete Node.js Module 1',
+    descriptionId: 'Selesaikan Module 1 Node.js',
+    emoji: '🟢',
+  },
+  API_MASTER: {
+    id: 'api_master',
+    name: 'API Master',
+    nameId: 'Master API',
+    description: 'Complete all Node.js modules',
+    descriptionId: 'Selesaikan semua module Node.js',
+    emoji: '🚀',
+  },
   PERFECT_SCORE: {
     id: 'perfect_score',
     name: 'Perfect Score',
