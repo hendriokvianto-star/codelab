@@ -4,8 +4,8 @@
   "version": "1.0.0",
   "scripts": {
     "start": "expo start",
-    "android": "\"%LOCALAPPDATA%\\Android\\Sdk\\platform-tools\\adb.exe\" connect 127.0.0.1:5555 & \"%LOCALAPPDATA%\\Android\\Sdk\\platform-tools\\adb.exe\" connect 127.0.0.1:16384 & expo start --android",
-    "mumu": "\"%LOCALAPPDATA%\\Android\\Sdk\\platform-tools\\adb.exe\" connect 127.0.0.1:5555 & \"%LOCALAPPDATA%\\Android\\Sdk\\platform-tools\\adb.exe\" connect 127.0.0.1:16384 & expo start --android",
+    "android": "\"C:\\Users\\Asus\\AppData\\Local\\Android\\Sdk\\platform-tools\\adb.exe\" connect 127.0.0.1:7555 & \"C:\\Users\\Asus\\AppData\\Local\\Android\\Sdk\\platform-tools\\adb.exe\" connect 127.0.0.1:16384 & expo start --android",
+    "mumu": "\"C:\\Users\\Asus\\AppData\\Local\\Android\\Sdk\\platform-tools\\adb.exe\" connect 127.0.0.1:7555 & \"C:\\Users\\Asus\\AppData\\Local\\Android\\Sdk\\platform-tools\\adb.exe\" connect 127.0.0.1:16384 & expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web"
   },
