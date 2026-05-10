@@ -7,7 +7,7 @@ import { StyleSheet, View, Text, ScrollView, StatusBar, Pressable } from 'react-
 import Animated, { FadeInDown, FadeInUp } from 'react-native-reanimated';
 import { useThemeColors, useTranslation } from '@/hooks/useAppTheme';
 import { useSettingsStore } from '@/stores/useSettingsStore';
-import { useUserStore } from '@/stores/useUserStore';
+import { useGamificationStore } from '@/stores/useGamificationStore';
 import { BADGES } from '@/constants/Gamification';
 import Card from '@/components/ui/Card';
 import ProgressBar from '@/components/ui/ProgressBar';
@@ -24,7 +24,7 @@ export default function RankScreen() {
   const colors = useThemeColors();
   const { t, language } = useTranslation();
   const isDarkMode = useSettingsStore((s) => s.isDarkMode);
-  const { totalXP, level, earnedBadges } = useUserStore();
+  const { totalXP, level, earnedBadges } = useGamificationStore();
 
   const allBadges = Object.values(BADGES);
   const earnedCount = earnedBadges.length;

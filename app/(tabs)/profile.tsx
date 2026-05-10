@@ -11,6 +11,7 @@ import { useSettingsStore } from '@/stores/useSettingsStore';
 import { useLessonStore } from '@/stores/useLessonStore';
 import { getLesson } from '@/content/index';
 import { useUserStore } from '@/stores/useUserStore';
+import { useGamificationStore } from '@/stores/useGamificationStore';
 import { getLevelFromXP, BADGES } from '@/constants/Gamification';
 import Card from '@/components/ui/Card';
 import ProgressBar from '@/components/ui/ProgressBar';
@@ -64,12 +65,12 @@ export default function ProfileScreen() {
   const currentLang = useSettingsStore((s) => s.language);
   const setLanguage = useSettingsStore((s) => s.setLanguage);
 
-  const totalXP = useUserStore((s) => s.totalXP);
-  const currentStreak = useUserStore((s) => s.currentStreak);
+  const totalXP = useGamificationStore((s) => s.totalXP);
+  const currentStreak = useGamificationStore((s) => s.currentStreak);
   const lessonsCompleted = useUserStore((s) => s.lessonsCompleted);
   const challengesSolved = useUserStore((s) => s.challengesSolved);
-  const earnedBadges = useUserStore((s) => s.earnedBadges);
-  const equippedBadge = useUserStore((s) => s.equippedBadge);
+  const earnedBadges = useGamificationStore((s) => s.earnedBadges);
+  const equippedBadge = useGamificationStore((s) => s.equippedBadge);
   const bookmarks = useLessonStore((s) => s.bookmarks);
 
   const levelInfo = getLevelFromXP(totalXP);
@@ -299,6 +300,7 @@ export default function ProfileScreen() {
                     style: 'destructive',
                     onPress: () => {
                       useUserStore.getState().resetProgress();
+                      useGamificationStore.getState().resetGamification();
                     },
                   },
                 ]

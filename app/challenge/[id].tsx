@@ -9,6 +9,7 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useThemeColors, useTranslation } from '@/hooks/useAppTheme';
 import { useSettingsStore } from '@/stores/useSettingsStore';
 import { useUserStore } from '@/stores/useUserStore';
+import { useGamificationStore } from '@/stores/useGamificationStore';
 import { getChallenge } from '@/content/challenges';
 import { checkBadges, type BadgeNotification } from '@/lib/badgeEngine';
 import Button from '@/components/ui/Button';
@@ -23,9 +24,9 @@ export default function ChallengeScreen() {
   const isDarkMode = useSettingsStore((s) => s.isDarkMode);
   const router = useRouter();
 
-  const addXP = useUserStore((s) => s.addXP);
+  const addXP = useGamificationStore((s) => s.addXP);
   const incrementChallenges = useUserStore((s) => s.incrementChallengesSolved);
-  const updateStreak = useUserStore((s) => s.updateStreak);
+  const updateStreak = useGamificationStore((s) => s.updateStreak);
 
   const challenge = getChallenge(id || '');
   const [code, setCode] = useState(challenge?.starterCode || '');
@@ -75,7 +76,7 @@ export default function ChallengeScreen() {
       // Check for speed coder badge
       const elapsed = (Date.now() - startTime.current) / 1000;
       if (elapsed < 120) {
-        useUserStore.getState().earnBadge('speed_coder');
+        useGamificationStore.getState().earnBadge('speed_coder');
       }
 
       // Check for new badges

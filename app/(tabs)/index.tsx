@@ -8,6 +8,7 @@ import Animated, { FadeInDown, BounceIn } from 'react-native-reanimated';
 import { useRouter, Redirect } from 'expo-router';
 import { useThemeColors, useTranslation } from '@/hooks/useAppTheme';
 import { useUserStore } from '@/stores/useUserStore';
+import { useGamificationStore } from '@/stores/useGamificationStore';
 import { useLessonStore } from '@/stores/useLessonStore';
 import { useSettingsStore } from '@/stores/useSettingsStore';
 import { getDailyChallenges } from '@/content/challenges';
@@ -24,7 +25,8 @@ export default function HomeScreen() {
   const { t, language } = useTranslation();
   const isDarkMode = useSettingsStore((s) => s.isDarkMode);
   const router = useRouter();
-  const { totalXP, lessonsCompleted, challengesSolved, currentStreak, loginToday } = useUserStore();
+  const { lessonsCompleted, challengesSolved } = useUserStore();
+  const { totalXP, currentStreak, loginToday } = useGamificationStore();
   const lessonStore = useLessonStore();
   const [showStreakModal, setShowStreakModal] = useState(false);
 

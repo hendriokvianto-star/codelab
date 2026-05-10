@@ -13,13 +13,13 @@ import Animated, {
   withDelay,
 } from 'react-native-reanimated';
 import { useThemeColors, useTranslation } from '@/hooks/useAppTheme';
-import { useUserStore } from '@/stores/useUserStore';
+import { useGamificationStore } from '@/stores/useGamificationStore';
 import Card from '@/components/ui/Card';
 
 export default function StreakWidget() {
   const colors = useThemeColors();
   const { t } = useTranslation();
-  const streakDays = useUserStore((s) => s.streakDays);
+  const streakDays = useGamificationStore((s) => s.streakDays);
 
   // Fire animation — gentle floating effect
   const fireScale = useSharedValue(1);

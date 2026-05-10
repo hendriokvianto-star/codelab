@@ -5,7 +5,7 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { useThemeColors } from '@/hooks/useAppTheme';
-import { useUserStore } from '@/stores/useUserStore';
+import { useGamificationStore } from '@/stores/useGamificationStore';
 import { getLevelFromXP } from '@/constants/Gamification';
 import { useSettingsStore } from '@/stores/useSettingsStore';
 import Card from '@/components/ui/Card';
@@ -14,7 +14,7 @@ import ProgressBar from '@/components/ui/ProgressBar';
 export default function XPLevelWidget() {
   const colors = useThemeColors();
   const language = useSettingsStore((s) => s.language);
-  const totalXP = useUserStore((s) => s.totalXP);
+  const totalXP = useGamificationStore((s) => s.totalXP);
   const levelInfo = getLevelFromXP(totalXP);
 
   const levelTitle = language === 'id' ? levelInfo.titleId : levelInfo.title;

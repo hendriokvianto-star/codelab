@@ -5,7 +5,7 @@ import * as Haptics from 'expo-haptics';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useThemeColors, useTranslation } from '@/hooks/useAppTheme';
-import { useUserStore } from '@/stores/useUserStore';
+import { useGamificationStore } from '@/stores/useGamificationStore';
 import { BADGES } from '@/constants/Gamification';
 import Card from '@/components/ui/Card';
 
@@ -16,9 +16,9 @@ export default function BadgesScreen() {
   const router = useRouter();
   const { language } = useTranslation();
   
-  const earnedBadges = useUserStore((s) => s.earnedBadges);
-  const equippedBadge = useUserStore((s) => s.equippedBadge);
-  const equipBadge = useUserStore((s) => s.equipBadge);
+  const earnedBadges = useGamificationStore((s) => s.earnedBadges);
+  const equippedBadge = useGamificationStore((s) => s.equippedBadge);
+  const equipBadge = useGamificationStore((s) => s.equipBadge);
 
   const [selectedBadge, setSelectedBadge] = useState<string | null>(null);
 

@@ -9,6 +9,7 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useThemeColors, useTranslation } from '@/hooks/useAppTheme';
 import { useSettingsStore } from '@/stores/useSettingsStore';
 import { useUserStore } from '@/stores/useUserStore';
+import { useGamificationStore } from '@/stores/useGamificationStore';
 import { useLessonStore } from '@/stores/useLessonStore';
 import { getLesson, getNextActivityId } from '@/content/index';
 import TheorySection from '@/components/lesson/TheorySection';
@@ -27,9 +28,9 @@ export default function LessonScreen() {
   const isDarkMode = useSettingsStore((s) => s.isDarkMode);
   const router = useRouter();
 
-  const addXP = useUserStore((s) => s.addXP);
+  const addXP = useGamificationStore((s) => s.addXP);
   const incrementLessonsCompleted = useUserStore((s) => s.incrementLessonsCompleted);
-  const updateStreak = useUserStore((s) => s.updateStreak);
+  const updateStreak = useGamificationStore((s) => s.updateStreak);
   const completeLesson = useLessonStore((s) => s.completeLesson);
 
   const lesson = getLesson(id || '');

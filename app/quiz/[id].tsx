@@ -9,6 +9,7 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useThemeColors, useTranslation } from '@/hooks/useAppTheme';
 import { useSettingsStore } from '@/stores/useSettingsStore';
 import { useUserStore } from '@/stores/useUserStore';
+import { useGamificationStore } from '@/stores/useGamificationStore';
 import { getQuiz } from '@/content/index';
 import { BADGES } from '@/constants/Gamification';
 import * as Haptics from 'expo-haptics';
@@ -23,8 +24,8 @@ export default function QuizScreen() {
   const { t, language } = useTranslation();
   const isDarkMode = useSettingsStore((s) => s.isDarkMode);
   const router = useRouter();
-  const addXP = useUserStore((s) => s.addXP);
-  const earnBadge = useUserStore((s) => s.earnBadge);
+  const addXP = useGamificationStore((s) => s.addXP);
+  const earnBadge = useGamificationStore((s) => s.earnBadge);
 
   const quiz = getQuiz(id || '');
   const [currentIndex, setCurrentIndex] = useState(0);

@@ -4,6 +4,7 @@
  * Call checkBadges() after XP gain, lesson complete, streak update, etc.
  */
 import { BADGES } from '@/constants/Gamification';
+import { useGamificationStore } from '@/stores/useGamificationStore';
 import { useUserStore } from '@/stores/useUserStore';
 import { useLessonStore } from '@/stores/useLessonStore';
 import { getCourseMeta, getModuleLessons } from '@/content/index';
@@ -20,13 +21,14 @@ export type BadgeNotification = {
  */
 export function checkBadges(): BadgeNotification[] {
   const userState = useUserStore.getState();
+  const gamificationState = useGamificationStore.getState();
   const lessonState = useLessonStore.getState();
-  const earned = userState.earnedBadges;
+  const earned = gamificationState.earnedBadges;
   const newBadges: BadgeNotification[] = [];
 
   const tryAward = (badge: typeof BADGES[keyof typeof BADGES]) => {
     if (!earned.includes(badge.id)) {
-      useUserStore.getState().earnBadge(badge.id);
+      useGamificationStore.getState().earnBadge(badge.id);
       newBadges.push({ id: badge.id, emoji: badge.emoji, name: badge.name, nameId: badge.nameId });
     }
   };
@@ -37,12 +39,12 @@ export function checkBadges(): BadgeNotification[] {
   }
 
   // 📅 Week Warrior — 7-day streak
-  if (userState.streakDays >= 7) {
+  if (gamificationState.streakDays >= 7) {
     tryAward(BADGES.WEEK_WARRIOR);
   }
 
   // 🏔️ Month Master — 30-day streak
-  if (userState.streakDays >= 30) {
+  if (gamificationState.streakDays >= 30) {
     tryAward(BADGES.MONTH_MASTER);
   }
 
@@ -67,7 +69,7 @@ export function checkBadges(): BadgeNotification[] {
   }
 
   // 🌟 Collector — earn 10 badges
-  if (useUserStore.getState().earnedBadges.length >= 10) {
+  if (useGamificationStore.getState().earnedBadges.length >= 10) {
     tryAward(BADGES.COLLECTOR);
   }
 
