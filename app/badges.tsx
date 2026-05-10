@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, ScrollView, Pressable, Platform, Dimensions } from 'react-native';
+import { StyleSheet, View, Text, FlatList, Pressable, Platform, Dimensions } from 'react-native';
 import Animated, { FadeInDown, SlideInDown, SlideOutDown } from 'react-native-reanimated';
 import * as Haptics from 'expo-haptics';
 import { useRouter } from 'expo-router';
@@ -40,63 +40,67 @@ export default function BadgesScreen() {
         <View style={{ width: 40 }} />
       </View>
 
-      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
-        <Animated.View entering={FadeInDown.duration(400)}>
-          <Card elevated style={styles.statsCard}>
-            <Text style={[styles.statsText, { color: colors.text }]}>
-              {language === 'id' ? 'Lencana Diperoleh: ' : 'Earned Badges: '}
-              <Text style={{ color: colors.primary, fontWeight: '800' }}>
-                {earnedBadges.length} / {allBadges.length}
+      <FlatList
+        data={allBadges}
+        numColumns={4}
+        keyExtractor={(item) => item.id}
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
+        columnWrapperStyle={styles.badgeGrid}
+        ListHeaderComponent={
+          <Animated.View entering={FadeInDown.duration(400)}>
+            <Card elevated style={styles.statsCard}>
+              <Text style={[styles.statsText, { color: colors.text }]}>
+                {language === 'id' ? 'Lencana Diperoleh: ' : 'Earned Badges: '}
+                <Text style={{ color: colors.primary, fontWeight: '800' }}>
+                  {earnedBadges.length} / {allBadges.length}
+                </Text>
               </Text>
-            </Text>
-          </Card>
-        </Animated.View>
-
-        <View style={styles.badgeGrid}>
-          {allBadges.map((badge, index) => {
-            const isEarned = earnedBadges.includes(badge.id);
-            const isEquipped = badge.id === equippedBadge;
-            
-            return (
-              <Animated.View 
-                key={badge.id} 
-                entering={FadeInDown.delay(index * 20).duration(300)}
-                style={styles.badgeItemWrapper}
+            </Card>
+          </Animated.View>
+        }
+        renderItem={({ item: badge, index }) => {
+          const isEarned = earnedBadges.includes(badge.id);
+          const isEquipped = badge.id === equippedBadge;
+          
+          return (
+            <Animated.View 
+              entering={FadeInDown.delay(index * 20).duration(300)}
+              style={styles.badgeItemWrapper}
+            >
+              <Pressable 
+                style={[styles.badgeItem, !isEarned && { opacity: 0.5 }]}
+                onPress={() => {
+                  Haptics.selectionAsync();
+                  setSelectedBadge(badge.id);
+                }}
               >
-                <Pressable 
-                  style={[styles.badgeItem, !isEarned && { opacity: 0.5 }]}
-                  onPress={() => {
-                    Haptics.selectionAsync();
-                    setSelectedBadge(badge.id);
-                  }}
-                >
-                  <View style={[
-                    styles.badgeIconWrapper, 
-                    { 
-                      backgroundColor: isEarned ? colors.primary + '15' : colors.border,
-                      borderColor: isEquipped ? colors.primary : (isEarned ? colors.primary + '40' : colors.border),
-                      borderWidth: isEquipped ? 2.5 : 1.5,
-                    }
-                  ]}>
-                    <Text style={[styles.badgeEmoji, !isEarned && { fontSize: 24, opacity: 0.6 }]}>
-                      {isEarned ? badge.emoji : '🔒'}
-                    </Text>
-                  </View>
-                  <Text style={[styles.badgeName, { color: colors.text }]} numberOfLines={2}>
-                    {language === 'id' ? badge.nameId : badge.name}
+                <View style={[
+                  styles.badgeIconWrapper, 
+                  { 
+                    backgroundColor: isEarned ? colors.primary + '15' : colors.border,
+                    borderColor: isEquipped ? colors.primary : (isEarned ? colors.primary + '40' : colors.border),
+                    borderWidth: isEquipped ? 2.5 : 1.5,
+                  }
+                ]}>
+                  <Text style={[styles.badgeEmoji, !isEarned && { fontSize: 24, opacity: 0.6 }]}>
+                    {isEarned ? badge.emoji : '🔒'}
                   </Text>
-                  {isEquipped && (
-                    <View style={[styles.equippedBadgeTag, { backgroundColor: colors.primary }]}>
-                      <Ionicons name="checkmark" size={10} color="#FFF" />
-                    </View>
-                  )}
-                </Pressable>
-              </Animated.View>
-            );
-          })}
-        </View>
-        <View style={{ height: 100 }} />
-      </ScrollView>
+                </View>
+                <Text style={[styles.badgeName, { color: colors.text }]} numberOfLines={2}>
+                  {language === 'id' ? badge.nameId : badge.name}
+                </Text>
+                {isEquipped && (
+                  <View style={[styles.equippedBadgeTag, { backgroundColor: colors.primary }]}>
+                    <Ionicons name="checkmark" size={10} color="#FFF" />
+                  </View>
+                )}
+              </Pressable>
+            </Animated.View>
+          );
+        }}
+        ListFooterComponent={<View style={{ height: 100 }} />}
+      />
 
       {/* Detail Modal / Bottom Sheet */}
       {selectedBadgeData && (
