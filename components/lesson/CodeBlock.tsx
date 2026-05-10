@@ -56,36 +56,27 @@ export default function CodeBlock({ code, language }: CodeBlockProps) {
         </View>
       )}
 
-      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        <View style={styles.codeContent}>
-          {/* Line numbers */}
-          <View style={styles.lineNumbers}>
-            {lines.map((_, i) => (
-              <Text key={i} style={[styles.lineNum, { color: colors.textMuted }]}>
+      <View style={styles.codeContent}>
+        {lines.map((line, i) => {
+          const isComment = line.trimStart().startsWith('//') || line.trimStart().startsWith('*') || line.trimStart().startsWith('{{--');
+          const isString = /(['"`]).*?\1/.test(line);
+
+          return (
+            <View key={i} style={styles.codeRow}>
+              <Text style={[styles.lineNum, { color: colors.textMuted }]}>
                 {i + 1}
               </Text>
-            ))}
-          </View>
-
-          {/* Code */}
-          <View style={styles.codeLines}>
-            {lines.map((line, i) => {
-              const isComment = line.trimStart().startsWith('//') || line.trimStart().startsWith('*') || line.trimStart().startsWith('{{--');
-              const isString = /(['"`]).*?\1/.test(line);
-
-              return (
-                <Text key={i} style={styles.codeLine}>
-                  {isComment ? (
-                    <Text style={{ color: '#6A9955' }}>{line}</Text>
-                  ) : (
-                    highlightLine(line, language)
-                  )}
-                </Text>
-              );
-            })}
-          </View>
-        </View>
-      </ScrollView>
+              <Text style={styles.codeLine}>
+                {isComment ? (
+                  <Text style={{ color: '#6A9955' }}>{line}</Text>
+                ) : (
+                  highlightLine(line, language)
+                )}
+              </Text>
+            </View>
+          );
+        })}
+      </View>
     </View>
   );
 }
@@ -105,21 +96,23 @@ const styles = StyleSheet.create({
   },
   langText: { fontSize: 10, fontWeight: '700', letterSpacing: 1 },
   codeContent: {
-    flexDirection: 'row',
     padding: 12,
   },
-  lineNumbers: {
-    marginRight: 12,
-    alignItems: 'flex-end',
-    minWidth: 24,
+  codeRow: {
+    flexDirection: 'row',
+    width: '100%',
   },
   lineNum: {
+    width: 24,
+    marginRight: 12,
+    textAlign: 'right',
     fontSize: 12,
     fontFamily: 'SpaceMono',
     lineHeight: 20,
   },
-  codeLines: { flex: 1 },
   codeLine: {
+    flex: 1,
+    flexWrap: 'wrap',
     fontSize: 13,
     fontFamily: 'SpaceMono',
     lineHeight: 20,
