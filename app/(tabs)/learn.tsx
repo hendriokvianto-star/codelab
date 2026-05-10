@@ -164,7 +164,16 @@ export default function LearnScreen() {
   const { t, language } = useTranslation();
   const isDarkMode = useSettingsStore((s) => s.isDarkMode);
   const router = useRouter();
-  const [activeTab, setActiveTab] = React.useState<'javascript' | 'laravel'>('javascript');
+  const [activeTab, setActiveTab] = React.useState<string>('javascript');
+
+  const ACTIVE_COURSES = [
+    { id: 'javascript', icon: '⚡', title: 'JavaScript', color: '#F7DF1E' },
+    { id: 'laravel', icon: '🔺', title: 'Laravel', color: '#FF2D20' },
+    { id: 'flutter', icon: '📱', title: 'Flutter', color: '#02569B' },
+    { id: 'golang', icon: '🐹', title: 'Go', color: '#00ADD8' },
+    { id: 'security', icon: '🛡️', title: 'Security', color: '#E3242B' },
+    { id: 'ai', icon: '🤖', title: 'AI', color: '#8A2BE2' }
+  ];
 
   const courseMeta = getCourseMeta(activeTab);
 
@@ -194,47 +203,37 @@ export default function LearnScreen() {
         </Animated.View>
 
         {/* Course Tabs */}
-        <View style={[styles.tabBar, { backgroundColor: colors.surface, borderColor: colors.border }]}>
-          <Pressable
-            onPress={() => setActiveTab('javascript')}
-            style={[
-              styles.tab,
-              activeTab === 'javascript' && { backgroundColor: '#F7DF1E20', borderColor: '#F7DF1E' },
-            ]}
+        <View style={{ marginBottom: 24, marginHorizontal: -20 }}>
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{ paddingHorizontal: 20, gap: 10 }}
           >
-            <Text style={styles.tabIcon}>⚡</Text>
-            <Text
-              style={[
-                styles.tabText,
-                {
-                  color: activeTab === 'javascript' ? '#F7DF1E' : colors.textSecondary,
-                  fontWeight: activeTab === 'javascript' ? '700' : '500',
-                },
-              ]}
-            >
-              JavaScript
-            </Text>
-          </Pressable>
-          <Pressable
-            onPress={() => setActiveTab('laravel')}
-            style={[
-              styles.tab,
-              activeTab === 'laravel' && { backgroundColor: '#FF2D2020', borderColor: '#FF2D20' },
-            ]}
-          >
-            <Text style={styles.tabIcon}>🔺</Text>
-            <Text
-              style={[
-                styles.tabText,
-                {
-                  color: activeTab === 'laravel' ? '#FF2D20' : colors.textSecondary,
-                  fontWeight: activeTab === 'laravel' ? '700' : '500',
-                },
-              ]}
-            >
-              Laravel
-            </Text>
-          </Pressable>
+            {ACTIVE_COURSES.map((course) => (
+              <Pressable
+                key={course.id}
+                onPress={() => setActiveTab(course.id)}
+                style={[
+                  styles.tab,
+                  { backgroundColor: colors.surface, borderColor: colors.border },
+                  activeTab === course.id && { backgroundColor: `${course.color}20`, borderColor: course.color },
+                ]}
+              >
+                <Text style={styles.tabIcon}>{course.icon}</Text>
+                <Text
+                  style={[
+                    styles.tabText,
+                    {
+                      color: activeTab === course.id ? course.color : colors.textSecondary,
+                      fontWeight: activeTab === course.id ? '700' : '500',
+                    },
+                  ]}
+                >
+                  {course.title}
+                </Text>
+              </Pressable>
+            ))}
+          </ScrollView>
         </View>
 
         {/* Modules */}
@@ -271,15 +270,14 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   tab: {
-    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 12,
+    paddingVertical: 10,
+    paddingHorizontal: 16,
     borderRadius: 12,
     gap: 8,
     borderWidth: 1,
-    borderColor: 'transparent',
   },
   tabIcon: { fontSize: 18 },
   tabText: { fontSize: 15 },
