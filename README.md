@@ -1,28 +1,35 @@
 # 🚀 CodeLab
 
-CodeLab adalah aplikasi pembelajaran interaktif *mobile-first* (berbasis Android/iOS) yang dirancang untuk membantu pengguna menguasai pemrograman (JavaScript & Laravel) dengan pendekatan gamifikasi yang menyenangkan.
+CodeLab adalah aplikasi pembelajaran interaktif *mobile-first* (berbasis Android/iOS) yang dirancang untuk membantu pengguna menguasai pemrograman dengan pendekatan gamifikasi yang imersif dan menyenangkan.
 
-Dibangun dengan **Expo SDK 54** dan **React Native**, aplikasi ini dilengkapi dengan fitur pelacakan progres, sistem level (XP), *daily streak*, serta tantangan harian.
+Dibangun dengan **Expo SDK 54** dan **React Native**, aplikasi ini dilengkapi dengan fitur pelacakan progres, sistem level (XP), *daily streak*, kuis, hingga inventaris lencana pencapaian.
 
 ![CodeLab Preview](./assets/images/splash-icon.png)
 
 ## ✨ Fitur Utama
 
-- 📚 **Pembelajaran Interaktif**: Modul terstruktur untuk JavaScript dan Laravel, mulai dari pengenalan hingga proyek akhir.
-- 🎮 **Gamifikasi Kuat**: Dapatkan XP untuk setiap pelajaran yang diselesaikan, naik level (Newbie hingga CodeLab Hero), kumpulkan *Badges*, dan pertahankan *Daily Streak*.
-- 💾 **Offline-First & Data Persistence**: Progres belajar, status onboarding, dan pengaturan pengguna disimpan secara lokal (menggunakan `AsyncStorage` via `Zustand Persist`), sehingga data tidak hilang saat aplikasi ditutup.
-- 🌓 **Tema & Personalisasi**: Mendukung Dark/Light Mode dan toggle bahasa (Indonesia / English).
+- 📚 **Kurikulum Terstruktur**: Modul komprehensif untuk **JavaScript**, **Laravel**, dan persiapan untuk pengembangan lintas platform (**Flutter**).
+- 🎮 **Gamifikasi Kuat (Gamification Engine)**: 
+  - Dapatkan XP untuk setiap pelajaran dan kuis yang diselesaikan.
+  - Naik level dari *Newbie* hingga *CodeLab Hero*.
+  - Pertahankan *Daily Streak* untuk menjaga motivasi.
+  - Kumpulkan *Badges* eksklusif, kelola di dalam Inventaris, dan pamerkan lencana favorit (*Equip Badge*) di Profil Anda.
+- 📳 **Pengalaman Sensorik (Haptics & Confetti)**: Dilengkapi dengan *Haptic Feedback* (*expo-haptics*) untuk respons sentuhan yang memuaskan dan animasi perayaan (*Confetti*) saat mencapai target.
+- ⚡ **Performa & Arsitektur Kelas Enterprise**: 
+  - Rendering memori efisien menggunakan `FlatList` untuk daftar panjang.
+  - Arsitektur status *(State Management)* yang sangat modular (dipisah menjadi `useGamificationStore`, `useUserStore`, `useLessonStore`, dan `useSettingsStore`).
+- 💾 **Offline-First & Data Persistence**: Progres belajar dan pengaturan pengguna disimpan secara lokal menggunakan `Zustand Persist` (mendukung Native `AsyncStorage` & Web `localStorage`).
+- 🌓 **Tema & Personalisasi**: Mendukung *Dark/Light Mode* otomatis dan toggle bahasa (Indonesia / English).
 - 🧭 **Navigasi Modern**: Menggunakan `Expo Router` untuk *file-based routing* yang rapi dengan *bottom tab navigation* (Home, Learn, Arena, Profile).
-- 📱 **Animasi Mulus**: UI dinamis dengan transisi halus menggunakan `react-native-reanimated`.
 
 ## 🛠️ Tech Stack
 
 - **Framework**: [React Native](https://reactnative.dev/) (v0.81.5) & [Expo](https://expo.dev/) (SDK 54)
 - **Routing**: [Expo Router](https://docs.expo.dev/router/introduction/)
-- **State Management**: [Zustand](https://github.com/pmndrs/zustand) (dengan middleware `persist`)
-- **Animasi**: [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated/)
+- **State Management**: [Zustand](https://github.com/pmndrs/zustand) (Modularisasi ketat)
+- **Animasi & Interaksi**: `react-native-reanimated`, `react-native-confetti-cannon`, `expo-haptics`
 - **Storage**: `@react-native-async-storage/async-storage` (Native) & `localStorage` (Web)
-- **Bahasa**: TypeScript
+- **Bahasa**: TypeScript (100% Type-Safe)
 
 ## 📂 Struktur Proyek
 
@@ -30,15 +37,19 @@ Dibangun dengan **Expo SDK 54** dan **React Native**, aplikasi ini dilengkapi de
 codelab/
 ├── app/                  # File-based routing (Expo Router)
 │   ├── (tabs)/           # Bottom navigation tabs (Home, Learn, Arena, Profile)
+│   ├── badges.tsx        # Layar Inventaris Lencana (FlatList optimized)
 │   ├── onboarding.tsx    # Alur welcome screen pengguna baru
-│   └── _layout.tsx       # Root layout & navigasi utama
-├── assets/               # Gambar, fonts, splash screen, icon
+│   └── quiz/[id].tsx     # Halaman kuis interaktif dengan haptics
 ├── components/           # Komponen UI reusable (Themed Text/View, dll)
-├── constants/            # Konfigurasi konstan (Gamification, Colors, i18n)
-├── content/              # Data pelajaran dan modul (JavaScript & Laravel)
+├── constants/            # Konfigurasi gamifikasi, level, lencana, dan warna
+├── content/              # Database konten terpusat (Modul JS, Laravel, Flutter)
 ├── hooks/                # Custom React Hooks
-├── lib/                  # Utility functions (seperti storage adapter platform-safe)
-└── stores/               # Zustand stores (useUserStore, useLessonStore, useSettingsStore)
+├── lib/                  # Utility functions (Badge Engine, Storage)
+└── stores/               # Zustand stores terpusat
+    ├── useGamificationStore.ts # Core Gamification (XP, Streak, Badges)
+    ├── useUserStore.ts         # Core Progression (Lessons, Challenges)
+    ├── useLessonStore.ts       # Lesson metadata & status
+    └── useSettingsStore.ts     # Tema & Bahasa
 ```
 
 ## 🚀 Cara Menjalankan (Getting Started)
@@ -82,10 +93,9 @@ eas build --platform android --profile preview
 
 ## ⚠️ Catatan Penting (Known Web Issues)
 
-Aplikasi ini dioptimalkan untuk pengalaman **Native Mobile (Android & iOS)**. Jika Anda menjalankan aplikasi ini di **Web Browser** (`npm run web`), Anda mungkin menemukan beberapa limitasi:
-- SSR (Server-Side Rendering) konflik dengan `react-native-reanimated` (`FadeInDown`), yang menyebabkan halaman Home, Profile, dan Rank terlihat kosong di browser.
-- *Touch events* pada beberapa elemen mungkin kurang responsif di mode web preview.
+Aplikasi ini sangat dioptimalkan untuk pengalaman **Native Mobile (Android & iOS)**. Jika Anda menjalankan aplikasi ini di **Web Browser** (`npm run web`), beberapa animasi tingkat lanjut seperti `react-native-reanimated` dan *Haptic Feedback* mungkin tidak berjalan dengan sempurna atau dinonaktifkan oleh *browser engine*. 
+
 **Gunakan Android Emulator, iOS Simulator, atau perangkat fisik (Expo Go) untuk pengalaman pengujian yang sempurna.**
 
 ---
-*Dibuat dengan ❤️ untuk pembelajaran coding yang lebih baik.*
+*Dibuat dengan ❤️ untuk pembelajaran coding yang lebih asyik dan terstruktur.*
