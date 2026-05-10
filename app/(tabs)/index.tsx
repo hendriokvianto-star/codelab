@@ -70,7 +70,7 @@ export default function HomeScreen() {
     { id: 'docker', icon: '🐳', title: 'Docker & DevOps', desc: language === 'id' ? 'Pelajari kontainerisasi dan CI/CD dasar' : 'Learn containerization and basic CI/CD', category: 'DevOps', color: '#2496ED', modules: 3, lessons: 9 },
     { id: 'golang', icon: '🐹', title: 'Go Microservices', desc: language === 'id' ? 'Pelajari Go untuk membangun microservices' : 'Learn Go to build microservices', category: 'Backend', color: '#00ADD8', modules: 3, lessons: 9 },
     { id: 'ai', icon: '🤖', title: 'AI & Prompt Eng.', desc: language === 'id' ? 'Kuasai LLM dan integrasi AI' : 'Master LLMs and AI integration', category: 'Fundamental', color: '#8A2BE2', modules: 3, lessons: 9 },
-    { id: 'flutter', icon: '📱', title: 'Flutter Mobile', desc: language === 'id' ? 'Bangun aplikasi iOS & Android native' : 'Build native iOS & Android apps', category: 'Frontend', color: '#02569B', modules: 1, lessons: 3 },
+    { id: 'flutter', icon: '📱', title: 'Flutter Mobile', desc: language === 'id' ? 'Bangun aplikasi iOS & Android native' : 'Build native iOS & Android apps', category: 'Frontend', color: '#02569B', modules: 3, lessons: 9 },
     { id: 'mongodb', icon: '🍃', title: 'MongoDB', desc: language === 'id' ? 'Pelajari database NoSQL berbasis dokumen' : 'Learn NoSQL document database', category: 'Database', color: '#47A248', modules: 3, lessons: 9 }
   ];
 

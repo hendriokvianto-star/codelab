@@ -20,6 +20,13 @@
       "titleId": "State Management & UI Lanjutan",
       "lessons": ["flutter-m2-l1", "flutter-m2-l2", "flutter-m2-l3"],
       "quizId": "flutter-m2-quiz"
+    },
+    {
+      "id": "flutter-m3",
+      "title": "Navigation & API Integration",
+      "titleId": "Navigasi & Integrasi API",
+      "lessons": ["flutter-m3-l1", "flutter-m3-l2", "flutter-m3-l3"],
+      "quizId": "flutter-m3-quiz"
     }
   ]
 }
