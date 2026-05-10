@@ -44,6 +44,7 @@ export interface QuizData {
   titleId: string;
   questions: QuizQuestion[];
   xpPerQuestion: number;
+  badgeId?: string;
 }
 
 export interface ModuleMeta {

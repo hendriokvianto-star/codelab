@@ -10,9 +10,55 @@ import { useThemeColors, useTranslation } from '@/hooks/useAppTheme';
 import { useSettingsStore } from '@/stores/useSettingsStore';
 import { useUserStore } from '@/stores/useUserStore';
 import { getQuiz } from '@/content/index';
+import { BADGES } from '@/constants/Gamification';
 import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
 import ProgressBar from '@/components/ui/ProgressBar';
+import ConfettiCannon from 'react-native-confetti-cannon';
+
+const QUIZ_BADGE_MAP: Record<string, string> = {
+  'js-m1-quiz': 'js_basics',
+  'js-m2-quiz': 'js_functions',
+  'js-m3-quiz': 'js_async',
+  'react-m1-quiz': 'react_rookie',
+  'react-m2-quiz': 'react_hooks',
+  'react-m3-quiz': 'react_router',
+  'ts-m1-quiz': 'ts_starter',
+  'ts-m3-quiz': 'type_defender',
+  'tailwind-m1-quiz': 'tailwind_starter',
+  'tailwind-m2-quiz': 'tailwind_master',
+  'node-m1-quiz': 'node_starter',
+  'node-m3-quiz': 'api_master',
+  'git-m1-quiz': 'git_starter',
+  'git-m2-quiz': 'version_master',
+  'python-m1-quiz': 'python_starter',
+  'python-m3-quiz': 'snake_charmer',
+  'rn-m1-quiz': 'rn_starter',
+  'rn-m3-quiz': 'mobile_expert',
+  'next-m1-quiz': 'next_starter',
+  'next-m3-quiz': 'next_gen_dev',
+  'docker-m1-quiz': 'docker_novice',
+  'docker-m2-quiz': 'image_builder',
+  'docker-m3-quiz': 'compose_captain',
+  'mongodb-m1-quiz': 'mongo_novice',
+  'mongodb-m2-quiz': 'document_master',
+  'mongodb-m3-quiz': 'aggregation_expert',
+  'aws-m1-quiz': 'cloud_explorer',
+  'aws-m2-quiz': 'ec2_pilot',
+  'aws-m3-quiz': 'aws_architect',
+  'security-m1-quiz': 'security_scout',
+  'security-m2-quiz': 'auth_defender',
+  'security-m3-quiz': 'cyber_ninja',
+  'golang-m1-quiz': 'gopher_novice',
+  'golang-m2-quiz': 'api_builder',
+  'golang-m3-quiz': 'microservice_expert',
+  'ai-m1-quiz': 'ai_apprentice',
+  'ai-m2-quiz': 'prompt_engineer',
+  'ai-m3-quiz': 'ai_architect',
+  'flutter-m1-quiz': 'widget_builder',
+  'flutter-m2-quiz': 'state_master',
+  'flutter-m3-quiz': 'flutter_developer',
+};
 
 export default function QuizScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -21,6 +67,7 @@ export default function QuizScreen() {
   const isDarkMode = useSettingsStore((s) => s.isDarkMode);
   const router = useRouter();
   const addXP = useUserStore((s) => s.addXP);
+  const earnBadge = useUserStore((s) => s.earnBadge);
 
   const quiz = getQuiz(id || '');
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -67,7 +114,16 @@ export default function QuizScreen() {
     } else {
       // Show results
       const totalXP = correctCount * quiz.xpPerQuestion;
+      const percent = Math.round((correctCount / totalQ) * 100);
+      
       if (totalXP > 0) addXP(totalXP);
+      
+      if (percent >= 50) {
+        const badgeId = QUIZ_BADGE_MAP[quiz.id];
+        if (badgeId) earnBadge(badgeId);
+        if (percent === 100) earnBadge('perfect_score');
+      }
+
       setShowResults(true);
     }
   };
@@ -77,9 +133,21 @@ export default function QuizScreen() {
     const percent = Math.round((correctCount / totalQ) * 100);
     const isPerfect = correctCount === totalQ;
 
+    const earnedBadgeId = percent >= 50 ? QUIZ_BADGE_MAP[quiz.id] : null;
+    const badge = earnedBadgeId ? BADGES[earnedBadgeId as keyof typeof BADGES] : null;
+
     return (
       <View style={[styles.container, { backgroundColor: colors.background }]}>
         <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+        {percent >= 50 && (
+          <ConfettiCannon 
+            count={100} 
+            origin={{x: 200, y: 0}} 
+            fadeOut 
+            fallSpeed={3000}
+            colors={[colors.primary, colors.success, colors.warning, '#FFF']}
+          />
+        )}
         <ScrollView contentContainerStyle={[styles.scrollContent, { justifyContent: 'center', alignItems: 'center', flex: 1 }]}>
           <Animated.View entering={FadeInDown.duration(500)} style={styles.resultsCard}>
             <Text style={styles.resultEmoji}>{isPerfect ? '🏆' : percent >= 75 ? '🎉' : percent >= 50 ? '👍' : '📖'}</Text>
@@ -104,6 +172,20 @@ export default function QuizScreen() {
                 ⭐ +{totalXP} XP {language === 'id' ? 'didapat!' : 'earned!'}
               </Text>
             </View>
+
+            {badge && percent >= 50 && (
+              <Animated.View entering={FadeInDown.delay(300).duration(500)} style={[styles.earnedBadgeRow, { backgroundColor: colors.primary + '15', borderColor: colors.primary }]}>
+                <Text style={styles.earnedBadgeEmoji}>{badge.emoji}</Text>
+                <View style={{ flex: 1 }}>
+                  <Text style={[styles.earnedBadgeTitle, { color: colors.primary }]}>
+                    {language === 'id' ? 'Lencana Terbuka!' : 'Badge Unlocked!'}
+                  </Text>
+                  <Text style={[styles.earnedBadgeName, { color: colors.text }]}>
+                    {language === 'id' ? badge.nameId : badge.name}
+                  </Text>
+                </View>
+              </Animated.View>
+            )}
 
             <View style={styles.resultButtons}>
               <Button
@@ -264,4 +346,17 @@ const styles = StyleSheet.create({
   xpBanner: { paddingHorizontal: 24, paddingVertical: 12, borderRadius: 20, marginBottom: 24 },
   xpBannerText: { fontSize: 16, fontWeight: '700' },
   resultButtons: { width: '100%', gap: 10 },
+  earnedBadgeRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 16,
+    borderRadius: 16,
+    borderWidth: 1.5,
+    marginBottom: 24,
+    gap: 12,
+    width: '100%',
+  },
+  earnedBadgeEmoji: { fontSize: 32 },
+  earnedBadgeTitle: { fontSize: 12, fontWeight: '800', textTransform: 'uppercase', marginBottom: 2 },
+  earnedBadgeName: { fontSize: 16, fontWeight: '700' },
 });

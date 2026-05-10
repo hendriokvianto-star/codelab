@@ -17,6 +17,7 @@ interface UserStats {
   lessonsCompleted: number;
   challengesSolved: number;
   earnedBadges: string[];
+  equippedBadge: string | null;
   hasCompletedOnboarding: boolean;
 }
 
@@ -32,6 +33,7 @@ interface UserState extends UserStats {
   updateStreak: () => void;
   loginToday: () => boolean;
   earnBadge: (badgeId: string) => void;
+  equipBadge: (badgeId: string | null) => void;
   completeOnboarding: () => void;
   resetProgress: () => void;
 }
@@ -46,6 +48,7 @@ const storeCreator = (set: any, get: any) => ({
   lessonsCompleted: 0,
   challengesSolved: 0,
   earnedBadges: [] as string[],
+  equippedBadge: null,
   hasCompletedOnboarding: false,
 
   get levelInfo() {
@@ -106,8 +109,13 @@ const storeCreator = (set: any, get: any) => ({
   earnBadge: (badgeId: string) =>
     set((state: UserStats) => {
       if (state.earnedBadges.includes(badgeId)) return state;
-      return { earnedBadges: [...state.earnedBadges, badgeId] };
+      // Auto equip if it's the first badge
+      const newEquipped = state.equippedBadge === null ? badgeId : state.equippedBadge;
+      return { earnedBadges: [...state.earnedBadges, badgeId], equippedBadge: newEquipped };
     }),
+
+  equipBadge: (badgeId: string | null) =>
+    set({ equippedBadge: badgeId }),
 
   completeOnboarding: () => set({ hasCompletedOnboarding: true }),
 
@@ -120,6 +128,7 @@ const storeCreator = (set: any, get: any) => ({
       lessonsCompleted: 0,
       challengesSolved: 0,
       earnedBadges: [],
+      equippedBadge: null,
     }),
 });
 
@@ -138,6 +147,7 @@ export const useUserStore = Platform.OS === 'web'
           lessonsCompleted: state.lessonsCompleted,
           challengesSolved: state.challengesSolved,
           earnedBadges: state.earnedBadges,
+          equippedBadge: state.equippedBadge,
           hasCompletedOnboarding: state.hasCompletedOnboarding,
         }),
       })

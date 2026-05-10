@@ -69,6 +69,7 @@ export default function ProfileScreen() {
   const lessonsCompleted = useUserStore((s) => s.lessonsCompleted);
   const challengesSolved = useUserStore((s) => s.challengesSolved);
   const earnedBadges = useUserStore((s) => s.earnedBadges);
+  const equippedBadge = useUserStore((s) => s.equippedBadge);
   const bookmarks = useLessonStore((s) => s.bookmarks);
 
   const levelInfo = getLevelFromXP(totalXP);
@@ -86,7 +87,14 @@ export default function ProfileScreen() {
           <View style={[styles.avatar, { backgroundColor: colors.primary }]}>
             <Text style={styles.avatarText}>CL</Text>
           </View>
-          <Text style={[styles.name, { color: colors.text }]}>Coder</Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6, marginBottom: 4 }}>
+            <Text style={[styles.name, { color: colors.text, marginBottom: 0 }]}>Coder</Text>
+            {equippedBadge && (
+              <View style={[styles.equippedHeaderTag, { backgroundColor: colors.primary + '20', borderColor: colors.primary }]}>
+                <Text style={styles.equippedHeaderEmoji}>{BADGES[equippedBadge as keyof typeof BADGES]?.emoji}</Text>
+              </View>
+            )}
+          </View>
           <View style={styles.levelRow}>
             <Text style={styles.levelEmoji}>{levelInfo.emoji}</Text>
             <Text style={[styles.levelTitle, { color: colors.primary }]}>
@@ -115,30 +123,53 @@ export default function ProfileScreen() {
         {/* Badge Showcase */}
         <Animated.View entering={FadeInDown.delay(150).duration(400)}>
           <Card elevated style={styles.badgeCard}>
-            <Text style={[styles.sectionTitle, { color: colors.text }]}>
-              🎖️ {language === 'id' ? 'Koleksi Lencana' : 'Badge Collection'} ({earnedBadges.length}/{Object.keys(BADGES).length})
-            </Text>
+            <View style={styles.badgeCardHeader}>
+              <Text style={[styles.sectionTitle, { color: colors.text, marginBottom: 0 }]}>
+                🎖️ {language === 'id' ? 'Koleksi Lencana' : 'Badge Collection'} ({earnedBadges.length}/{Object.keys(BADGES).length})
+              </Text>
+              <Pressable onPress={() => router.push('/badges' as any)}>
+                <Text style={{ color: colors.primary, fontWeight: '700', fontSize: 13 }}>
+                  {language === 'id' ? 'Lihat Semua' : 'See All'}
+                </Text>
+              </Pressable>
+            </View>
+            
             <View style={styles.badgeGrid}>
-              {Object.values(BADGES).map((badge) => {
-                const isEarned = earnedBadges.includes(badge.id);
-                return (
-                  <View key={badge.id} style={[styles.badgeItem, !isEarned && { opacity: 0.5 }]}>
-                    <View style={[
-                      styles.badgeIconWrapper, 
-                      { 
-                        backgroundColor: isEarned ? colors.primary + '20' : colors.border,
-                        borderColor: isEarned ? colors.primary + '40' : colors.border 
-                      }
-                    ]}>
-                      <Text style={[styles.badgeEmoji, !isEarned && { fontSize: 20 }]}>
-                        {isEarned ? badge.emoji : '🔒'}
+              {/* Show only up to 4 earned badges, or the first 4 if none earned */}
+              {Object.values(BADGES)
+                .sort((a, b) => {
+                  const aEarned = earnedBadges.includes(a.id) ? 1 : 0;
+                  const bEarned = earnedBadges.includes(b.id) ? 1 : 0;
+                  return bEarned - aEarned;
+                })
+                .slice(0, 4)
+                .map((badge) => {
+                  const isEarned = earnedBadges.includes(badge.id);
+                  const isEquipped = badge.id === equippedBadge;
+                  return (
+                    <View key={badge.id} style={[styles.badgeItem, !isEarned && { opacity: 0.5 }]}>
+                      <View style={[
+                        styles.badgeIconWrapper, 
+                        { 
+                          backgroundColor: isEarned ? colors.primary + '20' : colors.border,
+                          borderColor: isEquipped ? colors.primary : (isEarned ? colors.primary + '40' : colors.border),
+                          borderWidth: isEquipped ? 2 : 1.5
+                        }
+                      ]}>
+                        <Text style={[styles.badgeEmoji, !isEarned && { fontSize: 20 }]}>
+                          {isEarned ? badge.emoji : '🔒'}
+                        </Text>
+                        {isEquipped && (
+                          <View style={[styles.equippedBadgeTagSmall, { backgroundColor: colors.primary }]}>
+                            <Text style={{ color: '#FFF', fontSize: 8, fontWeight: 'bold' }}>✓</Text>
+                          </View>
+                        )}
+                      </View>
+                      <Text style={[styles.badgeName, { color: colors.text }]} numberOfLines={2}>
+                        {language === 'id' ? badge.nameId : badge.name}
                       </Text>
                     </View>
-                    <Text style={[styles.badgeName, { color: colors.text }]} numberOfLines={2}>
-                      {language === 'id' ? badge.nameId : badge.name}
-                    </Text>
-                  </View>
-                );
+                  );
               })}
             </View>
           </Card>
@@ -301,6 +332,17 @@ const styles = StyleSheet.create({
   },
   avatarText: { fontSize: 28, fontWeight: '800', color: '#FFF' },
   name: { fontSize: 24, fontWeight: '800', marginBottom: 4 },
+  equippedHeaderTag: {
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    borderRadius: 8,
+    borderWidth: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  equippedHeaderEmoji: {
+    fontSize: 14,
+  },
   levelRow: { flexDirection: 'row', alignItems: 'center', gap: 6 },
   levelEmoji: { fontSize: 18 },
   levelTitle: { fontSize: 16, fontWeight: '600' },
@@ -341,6 +383,7 @@ const styles = StyleSheet.create({
   },
   dangerText: { fontSize: 14, fontWeight: '700' },
   badgeCard: { marginBottom: 16 },
+  badgeCardHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 },
   badgeGrid: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' },
   badgeItem: { width: '23%', alignItems: 'center', marginBottom: 16, gap: 6 },
   badgeIconWrapper: {
@@ -353,4 +396,16 @@ const styles = StyleSheet.create({
   },
   badgeEmoji: { fontSize: 28 },
   badgeName: { fontSize: 10, textAlign: 'center', fontWeight: '600', lineHeight: 14 },
+  equippedBadgeTagSmall: {
+    position: 'absolute',
+    top: -2,
+    right: -2,
+    width: 16,
+    height: 16,
+    borderRadius: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1.5,
+    borderColor: '#FFF',
+  },
 });
