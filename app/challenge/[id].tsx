@@ -228,7 +228,7 @@ const styles = StyleSheet.create({
   description: { fontSize: 15, lineHeight: 24 },
   sectionLabel: { fontSize: 14, fontWeight: '700', marginTop: 20, marginBottom: 8, letterSpacing: 0.5 },
   editor: { borderRadius: 12, borderWidth: 1, minHeight: 200, overflow: 'hidden' },
-  codeInput: { fontSize: 13, fontFamily: 'SpaceMono', padding: 14, lineHeight: 20, minHeight: 200 },
+  codeInput: { flex: 1, width: '100%', fontSize: 13, fontFamily: 'SpaceMono', padding: 14, lineHeight: 20, minHeight: 200 },
   actionRow: { marginTop: 12, gap: 4 },
   testRow: { flexDirection: 'row', alignItems: 'flex-start', padding: 14, borderRadius: 12, borderWidth: 1, gap: 10, marginBottom: 8 },
   testInput: { fontSize: 12, fontFamily: 'SpaceMono', marginBottom: 2 },

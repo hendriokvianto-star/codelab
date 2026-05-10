@@ -262,7 +262,7 @@ const styles = StyleSheet.create({
   sectionLabel: { fontSize: 16, fontWeight: '700', marginBottom: 8, textTransform: 'uppercase', letterSpacing: 1 },
   hint: { fontSize: 13, marginBottom: 8, fontStyle: 'italic' },
   editor: { borderRadius: 12, borderWidth: 1, minHeight: 150, overflow: 'hidden' },
-  codeInput: { fontSize: 13, fontFamily: 'SpaceMono', padding: 14, lineHeight: 20, minHeight: 150 },
+  codeInput: { flex: 1, width: '100%', fontSize: 13, fontFamily: 'SpaceMono', padding: 14, lineHeight: 20, minHeight: 150 },
   outputCard: { marginTop: 12, borderLeftWidth: 3 },
   outputLabel: { fontSize: 12, fontWeight: '600', marginBottom: 6 },
   outputText: { fontSize: 13, lineHeight: 20 },
