@@ -20,6 +20,13 @@
       "titleId": "Teknik Prompt Engineering (Lanjutan)",
       "lessons": ["ai-m2-l1", "ai-m2-l2", "ai-m2-l3"],
       "quizId": "ai-m2-quiz"
+    },
+    {
+      "id": "ai-m3",
+      "title": "AI Integration & Agents",
+      "titleId": "Integrasi AI & Agen Cerdas",
+      "lessons": ["ai-m3-l1", "ai-m3-l2", "ai-m3-l3"],
+      "quizId": "ai-m3-quiz"
     }
   ]
 }

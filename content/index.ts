@@ -217,6 +217,8 @@ import aiM1Lessons from './ai/module-1/lessons';
 import aiM1Quiz from './ai/module-1/quiz';
 import aiM2Lessons from './ai/module-2/lessons';
 import aiM2Quiz from './ai/module-2/quiz';
+import aiM3Lessons from './ai/module-3/lessons';
+import aiM3Quiz from './ai/module-3/quiz';
 
 // Combine all content into a central database
 
@@ -314,7 +316,7 @@ const allQuizzes: Record<string, QuizData> = {};
 });
 
 // Register AI lessons
-[...aiM1Lessons, ...aiM2Lessons].forEach((l) => {
+[...aiM1Lessons, ...aiM2Lessons, ...aiM3Lessons].forEach((l) => {
   allLessons[l.id] = l;
 });
 
@@ -338,7 +340,7 @@ const allQuizzes: Record<string, QuizData> = {};
   awsM1Quiz, awsM2Quiz, awsM3Quiz,
   securityM1Quiz, securityM2Quiz, securityM3Quiz,
   golangM1Quiz, golangM2Quiz, golangM3Quiz,
-  aiM1Quiz, aiM2Quiz
+  aiM1Quiz, aiM2Quiz, aiM3Quiz
 ].forEach((q) => {
   allQuizzes[q.id] = q;
 });
