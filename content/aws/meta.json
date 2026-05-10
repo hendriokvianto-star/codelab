@@ -20,6 +20,13 @@
       "titleId": "Komputasi & Jaringan (EC2)",
       "lessons": ["aws-m2-l1", "aws-m2-l2", "aws-m2-l3"],
       "quizId": "aws-m2-quiz"
+    },
+    {
+      "id": "aws-m3",
+      "title": "Storage & Database (S3 & RDS)",
+      "titleId": "Penyimpanan & Database (S3 & RDS)",
+      "lessons": ["aws-m3-l1", "aws-m3-l2", "aws-m3-l3"],
+      "quizId": "aws-m3-quiz"
     }
   ]
 }

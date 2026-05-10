@@ -193,6 +193,8 @@ import awsM1Lessons from './aws/module-1/lessons';
 import awsM1Quiz from './aws/module-1/quiz';
 import awsM2Lessons from './aws/module-2/lessons';
 import awsM2Quiz from './aws/module-2/quiz';
+import awsM3Lessons from './aws/module-3/lessons';
+import awsM3Quiz from './aws/module-3/quiz';
 
 // Combine all content into a central database
 
@@ -275,7 +277,7 @@ const allQuizzes: Record<string, QuizData> = {};
 });
 
 // Register AWS lessons
-[...awsM1Lessons, ...awsM2Lessons].forEach((l) => {
+[...awsM1Lessons, ...awsM2Lessons, ...awsM3Lessons].forEach((l) => {
   allLessons[l.id] = l;
 });
 
@@ -296,7 +298,7 @@ const allQuizzes: Record<string, QuizData> = {};
   nextjsM1Quiz, nextjsM2Quiz, nextjsM3Quiz,
   dockerM1Quiz, dockerM2Quiz, dockerM3Quiz,
   mongodbM1Quiz, mongodbM2Quiz, mongodbM3Quiz,
-  awsM1Quiz, awsM2Quiz
+  awsM1Quiz, awsM2Quiz, awsM3Quiz
 ].forEach((q) => {
   allQuizzes[q.id] = q;
 });
