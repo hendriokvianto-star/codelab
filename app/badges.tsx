@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, ScrollView, Pressable, Platform, Dimensions } from 'react-native';
 import Animated, { FadeInDown, SlideInDown, SlideOutDown } from 'react-native-reanimated';
+import * as Haptics from 'expo-haptics';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useThemeColors, useTranslation } from '@/hooks/useAppTheme';
@@ -64,7 +65,10 @@ export default function BadgesScreen() {
               >
                 <Pressable 
                   style={[styles.badgeItem, !isEarned && { opacity: 0.5 }]}
-                  onPress={() => setSelectedBadge(badge.id)}
+                  onPress={() => {
+                    Haptics.selectionAsync();
+                    setSelectedBadge(badge.id);
+                  }}
                 >
                   <View style={[
                     styles.badgeIconWrapper, 
@@ -129,6 +133,7 @@ export default function BadgesScreen() {
                   }
                 ]}
                 onPress={() => {
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
                   if (isSelectedEquipped) {
                     equipBadge(null);
                   } else {

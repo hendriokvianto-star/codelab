@@ -11,54 +11,11 @@ import { useSettingsStore } from '@/stores/useSettingsStore';
 import { useUserStore } from '@/stores/useUserStore';
 import { getQuiz } from '@/content/index';
 import { BADGES } from '@/constants/Gamification';
+import * as Haptics from 'expo-haptics';
 import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
 import ProgressBar from '@/components/ui/ProgressBar';
 import ConfettiCannon from 'react-native-confetti-cannon';
-
-const QUIZ_BADGE_MAP: Record<string, string> = {
-  'js-m1-quiz': 'js_basics',
-  'js-m2-quiz': 'js_functions',
-  'js-m3-quiz': 'js_async',
-  'react-m1-quiz': 'react_rookie',
-  'react-m2-quiz': 'react_hooks',
-  'react-m3-quiz': 'react_router',
-  'ts-m1-quiz': 'ts_starter',
-  'ts-m3-quiz': 'type_defender',
-  'tailwind-m1-quiz': 'tailwind_starter',
-  'tailwind-m2-quiz': 'tailwind_master',
-  'node-m1-quiz': 'node_starter',
-  'node-m3-quiz': 'api_master',
-  'git-m1-quiz': 'git_starter',
-  'git-m2-quiz': 'version_master',
-  'python-m1-quiz': 'python_starter',
-  'python-m3-quiz': 'snake_charmer',
-  'rn-m1-quiz': 'rn_starter',
-  'rn-m3-quiz': 'mobile_expert',
-  'next-m1-quiz': 'next_starter',
-  'next-m3-quiz': 'next_gen_dev',
-  'docker-m1-quiz': 'docker_novice',
-  'docker-m2-quiz': 'image_builder',
-  'docker-m3-quiz': 'compose_captain',
-  'mongodb-m1-quiz': 'mongo_novice',
-  'mongodb-m2-quiz': 'document_master',
-  'mongodb-m3-quiz': 'aggregation_expert',
-  'aws-m1-quiz': 'cloud_explorer',
-  'aws-m2-quiz': 'ec2_pilot',
-  'aws-m3-quiz': 'aws_architect',
-  'security-m1-quiz': 'security_scout',
-  'security-m2-quiz': 'auth_defender',
-  'security-m3-quiz': 'cyber_ninja',
-  'golang-m1-quiz': 'gopher_novice',
-  'golang-m2-quiz': 'api_builder',
-  'golang-m3-quiz': 'microservice_expert',
-  'ai-m1-quiz': 'ai_apprentice',
-  'ai-m2-quiz': 'prompt_engineer',
-  'ai-m3-quiz': 'ai_architect',
-  'flutter-m1-quiz': 'widget_builder',
-  'flutter-m2-quiz': 'state_master',
-  'flutter-m3-quiz': 'flutter_developer',
-};
 
 export default function QuizScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -95,6 +52,7 @@ export default function QuizScreen() {
 
   const handleSelect = (index: number) => {
     if (isAnswered) return;
+    Haptics.selectionAsync();
     setSelectedOption(index);
   };
 
@@ -103,6 +61,9 @@ export default function QuizScreen() {
     setIsAnswered(true);
     if (selectedOption === question.correctIndex) {
       setCorrectCount((c) => c + 1);
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+    } else {
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
     }
   };
 
@@ -119,8 +80,7 @@ export default function QuizScreen() {
       if (totalXP > 0) addXP(totalXP);
       
       if (percent >= 50) {
-        const badgeId = QUIZ_BADGE_MAP[quiz.id];
-        if (badgeId) earnBadge(badgeId);
+        if (quiz.badgeId) earnBadge(quiz.badgeId);
         if (percent === 100) earnBadge('perfect_score');
       }
 
@@ -133,7 +93,7 @@ export default function QuizScreen() {
     const percent = Math.round((correctCount / totalQ) * 100);
     const isPerfect = correctCount === totalQ;
 
-    const earnedBadgeId = percent >= 50 ? QUIZ_BADGE_MAP[quiz.id] : null;
+    const earnedBadgeId = percent >= 50 ? quiz.badgeId : null;
     const badge = earnedBadgeId ? BADGES[earnedBadgeId as keyof typeof BADGES] : null;
 
     return (

@@ -334,6 +334,51 @@ const allQuizzes: Record<string, QuizData> = {};
   allLessons[l.id] = l;
 });
 
+// Map of quiz IDs to badge IDs
+const QUIZ_BADGE_MAP: Record<string, string> = {
+  'js-m1-quiz': 'js_basics',
+  'js-m2-quiz': 'js_functions',
+  'js-m3-quiz': 'js_async',
+  'react-m1-quiz': 'react_rookie',
+  'react-m2-quiz': 'react_hooks',
+  'react-m3-quiz': 'react_router',
+  'ts-m1-quiz': 'ts_starter',
+  'ts-m3-quiz': 'type_defender',
+  'tailwind-m1-quiz': 'tailwind_starter',
+  'tailwind-m2-quiz': 'tailwind_master',
+  'node-m1-quiz': 'node_starter',
+  'node-m3-quiz': 'api_master',
+  'git-m1-quiz': 'git_starter',
+  'git-m2-quiz': 'version_master',
+  'python-m1-quiz': 'python_starter',
+  'python-m3-quiz': 'snake_charmer',
+  'rn-m1-quiz': 'rn_starter',
+  'rn-m3-quiz': 'mobile_expert',
+  'next-m1-quiz': 'next_starter',
+  'next-m3-quiz': 'next_gen_dev',
+  'docker-m1-quiz': 'docker_novice',
+  'docker-m2-quiz': 'image_builder',
+  'docker-m3-quiz': 'compose_captain',
+  'mongodb-m1-quiz': 'mongo_novice',
+  'mongodb-m2-quiz': 'document_master',
+  'mongodb-m3-quiz': 'aggregation_expert',
+  'aws-m1-quiz': 'cloud_explorer',
+  'aws-m2-quiz': 'ec2_pilot',
+  'aws-m3-quiz': 'aws_architect',
+  'security-m1-quiz': 'security_scout',
+  'security-m2-quiz': 'auth_defender',
+  'security-m3-quiz': 'cyber_ninja',
+  'golang-m1-quiz': 'gopher_novice',
+  'golang-m2-quiz': 'api_builder',
+  'golang-m3-quiz': 'microservice_expert',
+  'ai-m1-quiz': 'ai_apprentice',
+  'ai-m2-quiz': 'prompt_engineer',
+  'ai-m3-quiz': 'ai_architect',
+  'flutter-m1-quiz': 'widget_builder',
+  'flutter-m2-quiz': 'state_master',
+  'flutter-m3-quiz': 'flutter_developer',
+};
+
 // Register quizzes
 [
   jsM1Quiz, jsM2Quiz, jsM3Quiz, 
@@ -357,6 +402,9 @@ const allQuizzes: Record<string, QuizData> = {};
   aiM1Quiz, aiM2Quiz, aiM3Quiz,
   flutterM1Quiz, flutterM2Quiz, flutterM3Quiz
 ].forEach((q) => {
+  if (QUIZ_BADGE_MAP[q.id]) {
+    q.badgeId = QUIZ_BADGE_MAP[q.id];
+  }
   allQuizzes[q.id] = q;
 });
 
