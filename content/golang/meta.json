@@ -13,6 +13,13 @@
       "titleId": "Dasar Golang & Konkurensi",
       "lessons": ["golang-m1-l1", "golang-m1-l2", "golang-m1-l3"],
       "quizId": "golang-m1-quiz"
+    },
+    {
+      "id": "golang-m2",
+      "title": "Building REST APIs",
+      "titleId": "Membangun REST API",
+      "lessons": ["golang-m2-l1", "golang-m2-l2", "golang-m2-l3"],
+      "quizId": "golang-m2-quiz"
     }
   ]
 }
