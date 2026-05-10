@@ -1,0 +1,18 @@
+{
+  "id": "ai",
+  "title": "AI & Prompt Engineering",
+  "titleId": "AI & Prompt Engineering",
+  "description": "Master LLMs and integrate AI into your code",
+  "descriptionId": "Kuasai LLM dan integrasikan AI ke dalam kode Anda",
+  "icon": "🤖",
+  "color": "#8A2BE2",
+  "modules": [
+    {
+      "id": "ai-m1",
+      "title": "LLM Basics & Core Concepts",
+      "titleId": "Dasar LLM & Konsep Inti",
+      "lessons": ["ai-m1-l1", "ai-m1-l2", "ai-m1-l3"],
+      "quizId": "ai-m1-quiz"
+    }
+  ]
+}
