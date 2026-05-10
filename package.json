@@ -4,8 +4,8 @@
   "version": "1.0.0",
   "scripts": {
     "start": "expo start",
-    "android": "adb connect 127.0.0.1:5555 & adb connect 127.0.0.1:16384 & expo start --android",
-    "mumu": "adb connect 127.0.0.1:5555 & adb connect 127.0.0.1:16384 & expo start --android",
+    "android": "\"%LOCALAPPDATA%\\Android\\Sdk\\platform-tools\\adb\" connect 127.0.0.1:5555 & \"%LOCALAPPDATA%\\Android\\Sdk\\platform-tools\\adb\" connect 127.0.0.1:16384 & expo start --android",
+    "mumu": "\"%LOCALAPPDATA%\\Android\\Sdk\\platform-tools\\adb\" connect 127.0.0.1:5555 & \"%LOCALAPPDATA%\\Android\\Sdk\\platform-tools\\adb\" connect 127.0.0.1:16384 & expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web"
   },
