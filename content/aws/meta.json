@@ -1,0 +1,18 @@
+{
+  "id": "aws",
+  "title": "AWS Cloud Computing",
+  "titleId": "Komputasi Cloud AWS",
+  "description": "Learn cloud infrastructure with Amazon Web Services",
+  "descriptionId": "Pelajari infrastruktur cloud dengan Amazon Web Services",
+  "icon": "☁️",
+  "color": "#FF9900",
+  "modules": [
+    {
+      "id": "aws-m1",
+      "title": "Intro to Cloud & IAM",
+      "titleId": "Pengenalan Cloud & IAM",
+      "lessons": ["aws-m1-l1", "aws-m1-l2", "aws-m1-l3"],
+      "quizId": "aws-m1-quiz"
+    }
+  ]
+}
