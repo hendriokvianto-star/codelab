@@ -1,0 +1,18 @@
+{
+  "id": "flutter",
+  "title": "Flutter Cross-Platform",
+  "titleId": "Flutter Mobile Lintas Platform",
+  "description": "Build beautiful iOS and Android apps from a single codebase",
+  "descriptionId": "Bangun aplikasi iOS dan Android yang indah dari satu basis kode",
+  "icon": "📱",
+  "color": "#02569B",
+  "modules": [
+    {
+      "id": "flutter-m1",
+      "title": "Dart Basics & Widgets",
+      "titleId": "Dasar Dart & Widget",
+      "lessons": ["flutter-m1-l1", "flutter-m1-l2", "flutter-m1-l3"],
+      "quizId": "flutter-m1-quiz"
+    }
+  ]
+}

@@ -220,6 +220,10 @@ import aiM2Quiz from './ai/module-2/quiz';
 import aiM3Lessons from './ai/module-3/lessons';
 import aiM3Quiz from './ai/module-3/quiz';
 
+import flutterMeta from './flutter/meta.json';
+import flutterM1Lessons from './flutter/module-1/lessons';
+import flutterM1Quiz from './flutter/module-1/quiz';
+
 // Combine all content into a central database
 
 const allLessons: Record<string, LessonData> = {};
@@ -320,6 +324,11 @@ const allQuizzes: Record<string, QuizData> = {};
   allLessons[l.id] = l;
 });
 
+// Register Flutter lessons
+[...flutterM1Lessons].forEach((l) => {
+  allLessons[l.id] = l;
+});
+
 // Register quizzes
 [
   jsM1Quiz, jsM2Quiz, jsM3Quiz, 
@@ -340,7 +349,8 @@ const allQuizzes: Record<string, QuizData> = {};
   awsM1Quiz, awsM2Quiz, awsM3Quiz,
   securityM1Quiz, securityM2Quiz, securityM3Quiz,
   golangM1Quiz, golangM2Quiz, golangM3Quiz,
-  aiM1Quiz, aiM2Quiz, aiM3Quiz
+  aiM1Quiz, aiM2Quiz, aiM3Quiz,
+  flutterM1Quiz
 ].forEach((q) => {
   allQuizzes[q.id] = q;
 });
@@ -373,6 +383,7 @@ export function getCourseMeta(courseId: string): CourseMeta {
   if (courseId === 'security') return securityMeta as unknown as CourseMeta;
   if (courseId === 'golang') return golangMeta as unknown as CourseMeta;
   if (courseId === 'ai') return aiMeta as unknown as CourseMeta;
+  if (courseId === 'flutter') return flutterMeta as unknown as CourseMeta;
   return jsMeta as unknown as CourseMeta;
 }
 
