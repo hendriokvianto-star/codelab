@@ -1,0 +1,18 @@
+{
+  "id": "security",
+  "title": "Web Security & OWASP",
+  "titleId": "Keamanan Web & OWASP",
+  "description": "Learn to defend web apps against top vulnerabilities",
+  "descriptionId": "Pelajari cara melindungi aplikasi web dari kerentanan utama",
+  "icon": "🛡️",
+  "color": "#E3242B",
+  "modules": [
+    {
+      "id": "security-m1",
+      "title": "OWASP & Injection Attacks",
+      "titleId": "OWASP & Serangan Injeksi",
+      "lessons": ["security-m1-l1", "security-m1-l2", "security-m1-l3"],
+      "quizId": "security-m1-quiz"
+    }
+  ]
+}

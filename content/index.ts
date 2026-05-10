@@ -196,6 +196,10 @@ import awsM2Quiz from './aws/module-2/quiz';
 import awsM3Lessons from './aws/module-3/lessons';
 import awsM3Quiz from './aws/module-3/quiz';
 
+import securityMeta from './security/meta.json';
+import securityM1Lessons from './security/module-1/lessons';
+import securityM1Quiz from './security/module-1/quiz';
+
 // Combine all content into a central database
 
 const allLessons: Record<string, LessonData> = {};
@@ -281,6 +285,11 @@ const allQuizzes: Record<string, QuizData> = {};
   allLessons[l.id] = l;
 });
 
+// Register Security lessons
+[...securityM1Lessons].forEach((l) => {
+  allLessons[l.id] = l;
+});
+
 // Register quizzes
 [
   jsM1Quiz, jsM2Quiz, jsM3Quiz, 
@@ -298,7 +307,8 @@ const allQuizzes: Record<string, QuizData> = {};
   nextjsM1Quiz, nextjsM2Quiz, nextjsM3Quiz,
   dockerM1Quiz, dockerM2Quiz, dockerM3Quiz,
   mongodbM1Quiz, mongodbM2Quiz, mongodbM3Quiz,
-  awsM1Quiz, awsM2Quiz, awsM3Quiz
+  awsM1Quiz, awsM2Quiz, awsM3Quiz,
+  securityM1Quiz
 ].forEach((q) => {
   allQuizzes[q.id] = q;
 });
@@ -328,6 +338,7 @@ export function getCourseMeta(courseId: string): CourseMeta {
   if (courseId === 'docker') return dockerMeta as unknown as CourseMeta;
   if (courseId === 'mongodb') return mongodbMeta as unknown as CourseMeta;
   if (courseId === 'aws') return awsMeta as unknown as CourseMeta;
+  if (courseId === 'security') return securityMeta as unknown as CourseMeta;
   return jsMeta as unknown as CourseMeta;
 }
 
