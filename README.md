@@ -4,7 +4,9 @@ CodeLab adalah aplikasi pembelajaran interaktif *mobile-first* (berbasis Android
 
 Dibangun dengan **Expo SDK 54** dan **React Native**, aplikasi ini dilengkapi dengan fitur pelacakan progres, sistem level (XP), *daily streak*, kuis, hingga inventaris lencana pencapaian.
 
-![CodeLab Preview](./assets/images/splash-icon.png)
+<p align="center">
+  <img src="./assets/images/icon.png" alt="CodeLab Icon" width="150" />
+</p>
 
 ## ✨ Fitur Utama
 
