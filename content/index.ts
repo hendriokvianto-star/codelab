@@ -201,6 +201,8 @@ import securityM1Lessons from './security/module-1/lessons';
 import securityM1Quiz from './security/module-1/quiz';
 import securityM2Lessons from './security/module-2/lessons';
 import securityM2Quiz from './security/module-2/quiz';
+import securityM3Lessons from './security/module-3/lessons';
+import securityM3Quiz from './security/module-3/quiz';
 
 // Combine all content into a central database
 
@@ -288,7 +290,7 @@ const allQuizzes: Record<string, QuizData> = {};
 });
 
 // Register Security lessons
-[...securityM1Lessons, ...securityM2Lessons].forEach((l) => {
+[...securityM1Lessons, ...securityM2Lessons, ...securityM3Lessons].forEach((l) => {
   allLessons[l.id] = l;
 });
 
@@ -310,7 +312,7 @@ const allQuizzes: Record<string, QuizData> = {};
   dockerM1Quiz, dockerM2Quiz, dockerM3Quiz,
   mongodbM1Quiz, mongodbM2Quiz, mongodbM3Quiz,
   awsM1Quiz, awsM2Quiz, awsM3Quiz,
-  securityM1Quiz, securityM2Quiz
+  securityM1Quiz, securityM2Quiz, securityM3Quiz
 ].forEach((q) => {
   allQuizzes[q.id] = q;
 });

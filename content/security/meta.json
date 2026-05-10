@@ -20,6 +20,13 @@
       "titleId": "Autentikasi & Manajemen Sesi",
       "lessons": ["security-m2-l1", "security-m2-l2", "security-m2-l3"],
       "quizId": "security-m2-quiz"
+    },
+    {
+      "id": "security-m3",
+      "title": "Data Protection & Defensive Practices",
+      "titleId": "Perlindungan Data & Praktik Defensif",
+      "lessons": ["security-m3-l1", "security-m3-l2", "security-m3-l3"],
+      "quizId": "security-m3-quiz"
     }
   ]
 }
