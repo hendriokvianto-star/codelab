@@ -13,6 +13,13 @@
       "titleId": "Dasar Dart & Widget",
       "lessons": ["flutter-m1-l1", "flutter-m1-l2", "flutter-m1-l3"],
       "quizId": "flutter-m1-quiz"
+    },
+    {
+      "id": "flutter-m2",
+      "title": "State Management & Advanced UI",
+      "titleId": "State Management & UI Lanjutan",
+      "lessons": ["flutter-m2-l1", "flutter-m2-l2", "flutter-m2-l3"],
+      "quizId": "flutter-m2-quiz"
     }
   ]
 }

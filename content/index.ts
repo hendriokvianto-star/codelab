@@ -223,6 +223,8 @@ import aiM3Quiz from './ai/module-3/quiz';
 import flutterMeta from './flutter/meta.json';
 import flutterM1Lessons from './flutter/module-1/lessons';
 import flutterM1Quiz from './flutter/module-1/quiz';
+import flutterM2Lessons from './flutter/module-2/lessons';
+import flutterM2Quiz from './flutter/module-2/quiz';
 
 // Combine all content into a central database
 
@@ -325,7 +327,7 @@ const allQuizzes: Record<string, QuizData> = {};
 });
 
 // Register Flutter lessons
-[...flutterM1Lessons].forEach((l) => {
+[...flutterM1Lessons, ...flutterM2Lessons].forEach((l) => {
   allLessons[l.id] = l;
 });
 
@@ -350,7 +352,7 @@ const allQuizzes: Record<string, QuizData> = {};
   securityM1Quiz, securityM2Quiz, securityM3Quiz,
   golangM1Quiz, golangM2Quiz, golangM3Quiz,
   aiM1Quiz, aiM2Quiz, aiM3Quiz,
-  flutterM1Quiz
+  flutterM1Quiz, flutterM2Quiz
 ].forEach((q) => {
   allQuizzes[q.id] = q;
 });
