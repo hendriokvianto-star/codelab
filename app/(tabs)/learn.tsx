@@ -5,7 +5,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, ScrollView, StatusBar, Pressable } from 'react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
-import { useRouter } from 'expo-router';
+import { useRouter, useLocalSearchParams } from 'expo-router';
 import { useThemeColors, useTranslation } from '@/hooks/useAppTheme';
 import { useSettingsStore } from '@/stores/useSettingsStore';
 import { useLessonStore } from '@/stores/useLessonStore';
@@ -164,15 +164,37 @@ export default function LearnScreen() {
   const { t, language } = useTranslation();
   const isDarkMode = useSettingsStore((s) => s.isDarkMode);
   const router = useRouter();
-  const [activeTab, setActiveTab] = React.useState<string>('javascript');
+  const { course } = useLocalSearchParams<{ course?: string }>();
+
+  const [activeTab, setActiveTab] = React.useState<string>(course || 'javascript');
+
+  React.useEffect(() => {
+    if (course && course !== activeTab) {
+      setActiveTab(course);
+    }
+  }, [course]);
 
   const ACTIVE_COURSES = [
     { id: 'javascript', icon: '⚡', title: 'JavaScript', color: '#F7DF1E' },
     { id: 'laravel', icon: '🔺', title: 'Laravel', color: '#FF2D20' },
-    { id: 'flutter', icon: '📱', title: 'Flutter', color: '#02569B' },
+    { id: 'html', icon: '📄', title: 'HTML', color: '#E34F26' },
+    { id: 'css', icon: '🎨', title: 'CSS', color: '#1572B6' },
+    { id: 'react', icon: '⚛️', title: 'React.js', color: '#61DAFB' },
+    { id: 'sql', icon: '🗄️', title: 'SQL & Databases', color: '#336791' },
+    { id: 'tailwind', icon: '🪶', title: 'Tailwind CSS', color: '#0ED3CF' },
+    { id: 'nodejs', icon: '🟢', title: 'Node.js', color: '#68A063' },
+    { id: 'git', icon: '🐙', title: 'Git & GitHub', color: '#F05032' },
+    { id: 'python', icon: '🐍', title: 'Python', color: '#3776AB' },
+    { id: 'reactnative', icon: '📱', title: 'React Native', color: '#06B6D4' },
+    { id: 'typescript', icon: '📘', title: 'TypeScript', color: '#3178C6' },
+    { id: 'nextjs', icon: '⬛', title: 'Next.js', color: '#111111' },
+    { id: 'security', icon: '🛡️', title: 'Web Security', color: '#E3242B' },
+    { id: 'aws', icon: '☁️', title: 'AWS Cloud', color: '#FF9900' },
+    { id: 'docker', icon: '🐳', title: 'Docker', color: '#2496ED' },
     { id: 'golang', icon: '🐹', title: 'Go', color: '#00ADD8' },
-    { id: 'security', icon: '🛡️', title: 'Security', color: '#E3242B' },
-    { id: 'ai', icon: '🤖', title: 'AI', color: '#8A2BE2' }
+    { id: 'ai', icon: '🤖', title: 'AI & Prompt Eng.', color: '#8A2BE2' },
+    { id: 'flutter', icon: '📱', title: 'Flutter', color: '#02569B' },
+    { id: 'mongodb', icon: '🍃', title: 'MongoDB', color: '#47A248' }
   ];
 
   const courseMeta = getCourseMeta(activeTab);

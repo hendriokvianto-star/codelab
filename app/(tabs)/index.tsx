@@ -249,7 +249,7 @@ export default function HomeScreen() {
               lessons={c.lessons}
               progress={lessonStore.getCourseProgress(c.id)}
               color={c.color}
-              onPress={() => router.push('/(tabs)/learn' as any)}
+              onPress={() => router.push({ pathname: '/(tabs)/learn', params: { course: c.id } } as any)}
               index={idx}
             />
           ))
