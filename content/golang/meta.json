@@ -1,0 +1,18 @@
+{
+  "id": "golang",
+  "title": "Go (Golang) Microservices",
+  "titleId": "Go (Golang) Microservices",
+  "description": "Learn Go to build high-performance microservices",
+  "descriptionId": "Pelajari Go untuk membangun microservices performa tinggi",
+  "icon": "🐹",
+  "color": "#00ADD8",
+  "modules": [
+    {
+      "id": "golang-m1",
+      "title": "Go Basics & Concurrency",
+      "titleId": "Dasar Golang & Konkurensi",
+      "lessons": ["golang-m1-l1", "golang-m1-l2", "golang-m1-l3"],
+      "quizId": "golang-m1-quiz"
+    }
+  ]
+}

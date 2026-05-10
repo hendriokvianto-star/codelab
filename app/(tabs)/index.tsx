@@ -68,6 +68,7 @@ export default function HomeScreen() {
     { id: 'security', icon: '🛡️', title: 'Web Security', desc: language === 'id' ? 'Pelajari cara melindungi aplikasi web dari kerentanan' : 'Learn to defend web apps against vulnerabilities', category: 'Fundamental', color: '#E3242B', modules: 3, lessons: 9 },
     { id: 'aws', icon: '☁️', title: 'AWS Cloud', desc: language === 'id' ? 'Pelajari komputasi cloud dengan Amazon Web Services' : 'Learn cloud computing with Amazon Web Services', category: 'DevOps', color: '#FF9900', modules: 3, lessons: 9 },
     { id: 'docker', icon: '🐳', title: 'Docker & DevOps', desc: language === 'id' ? 'Pelajari kontainerisasi dan CI/CD dasar' : 'Learn containerization and basic CI/CD', category: 'DevOps', color: '#2496ED', modules: 3, lessons: 9 },
+    { id: 'golang', icon: '🐹', title: 'Go Microservices', desc: language === 'id' ? 'Pelajari Go untuk membangun microservices' : 'Learn Go to build microservices', category: 'Backend', color: '#00ADD8', modules: 1, lessons: 3 },
     { id: 'mongodb', icon: '🍃', title: 'MongoDB', desc: language === 'id' ? 'Pelajari database NoSQL berbasis dokumen' : 'Learn NoSQL document database', category: 'Database', color: '#47A248', modules: 3, lessons: 9 }
   ];
 

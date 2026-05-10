@@ -204,6 +204,10 @@ import securityM2Quiz from './security/module-2/quiz';
 import securityM3Lessons from './security/module-3/lessons';
 import securityM3Quiz from './security/module-3/quiz';
 
+import golangMeta from './golang/meta.json';
+import golangM1Lessons from './golang/module-1/lessons';
+import golangM1Quiz from './golang/module-1/quiz';
+
 // Combine all content into a central database
 
 const allLessons: Record<string, LessonData> = {};
@@ -294,6 +298,11 @@ const allQuizzes: Record<string, QuizData> = {};
   allLessons[l.id] = l;
 });
 
+// Register Golang lessons
+[...golangM1Lessons].forEach((l) => {
+  allLessons[l.id] = l;
+});
+
 // Register quizzes
 [
   jsM1Quiz, jsM2Quiz, jsM3Quiz, 
@@ -312,7 +321,8 @@ const allQuizzes: Record<string, QuizData> = {};
   dockerM1Quiz, dockerM2Quiz, dockerM3Quiz,
   mongodbM1Quiz, mongodbM2Quiz, mongodbM3Quiz,
   awsM1Quiz, awsM2Quiz, awsM3Quiz,
-  securityM1Quiz, securityM2Quiz, securityM3Quiz
+  securityM1Quiz, securityM2Quiz, securityM3Quiz,
+  golangM1Quiz
 ].forEach((q) => {
   allQuizzes[q.id] = q;
 });
@@ -343,6 +353,7 @@ export function getCourseMeta(courseId: string): CourseMeta {
   if (courseId === 'mongodb') return mongodbMeta as unknown as CourseMeta;
   if (courseId === 'aws') return awsMeta as unknown as CourseMeta;
   if (courseId === 'security') return securityMeta as unknown as CourseMeta;
+  if (courseId === 'golang') return golangMeta as unknown as CourseMeta;
   return jsMeta as unknown as CourseMeta;
 }
 
