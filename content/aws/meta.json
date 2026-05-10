@@ -13,6 +13,13 @@
       "titleId": "Pengenalan Cloud & IAM",
       "lessons": ["aws-m1-l1", "aws-m1-l2", "aws-m1-l3"],
       "quizId": "aws-m1-quiz"
+    },
+    {
+      "id": "aws-m2",
+      "title": "Compute & Networking (EC2)",
+      "titleId": "Komputasi & Jaringan (EC2)",
+      "lessons": ["aws-m2-l1", "aws-m2-l2", "aws-m2-l3"],
+      "quizId": "aws-m2-quiz"
     }
   ]
 }
