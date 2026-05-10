@@ -209,6 +209,8 @@ import golangM1Lessons from './golang/module-1/lessons';
 import golangM1Quiz from './golang/module-1/quiz';
 import golangM2Lessons from './golang/module-2/lessons';
 import golangM2Quiz from './golang/module-2/quiz';
+import golangM3Lessons from './golang/module-3/lessons';
+import golangM3Quiz from './golang/module-3/quiz';
 
 // Combine all content into a central database
 
@@ -301,7 +303,7 @@ const allQuizzes: Record<string, QuizData> = {};
 });
 
 // Register Golang lessons
-[...golangM1Lessons, ...golangM2Lessons].forEach((l) => {
+[...golangM1Lessons, ...golangM2Lessons, ...golangM3Lessons].forEach((l) => {
   allLessons[l.id] = l;
 });
 
@@ -324,7 +326,7 @@ const allQuizzes: Record<string, QuizData> = {};
   mongodbM1Quiz, mongodbM2Quiz, mongodbM3Quiz,
   awsM1Quiz, awsM2Quiz, awsM3Quiz,
   securityM1Quiz, securityM2Quiz, securityM3Quiz,
-  golangM1Quiz, golangM2Quiz
+  golangM1Quiz, golangM2Quiz, golangM3Quiz
 ].forEach((q) => {
   allQuizzes[q.id] = q;
 });

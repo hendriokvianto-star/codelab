@@ -20,6 +20,13 @@
       "titleId": "Membangun REST API",
       "lessons": ["golang-m2-l1", "golang-m2-l2", "golang-m2-l3"],
       "quizId": "golang-m2-quiz"
+    },
+    {
+      "id": "golang-m3",
+      "title": "Microservice Architecture",
+      "titleId": "Arsitektur Microservices",
+      "lessons": ["golang-m3-l1", "golang-m3-l2", "golang-m3-l3"],
+      "quizId": "golang-m3-quiz"
     }
   ]
 }
