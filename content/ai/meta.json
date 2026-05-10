@@ -13,6 +13,13 @@
       "titleId": "Dasar LLM & Konsep Inti",
       "lessons": ["ai-m1-l1", "ai-m1-l2", "ai-m1-l3"],
       "quizId": "ai-m1-quiz"
+    },
+    {
+      "id": "ai-m2",
+      "title": "Advanced Prompt Engineering",
+      "titleId": "Teknik Prompt Engineering (Lanjutan)",
+      "lessons": ["ai-m2-l1", "ai-m2-l2", "ai-m2-l3"],
+      "quizId": "ai-m2-quiz"
     }
   ]
 }
